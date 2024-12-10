@@ -31,7 +31,7 @@ CREATE TABLE Platform(
    PRIMARY KEY(Id_platform)
 );
 
-CREATE TABLE Avaible(
+CREATE TABLE Available(
    Id_game INT,
    Id_platform INT,
    PRIMARY KEY(Id_game, Id_platform),
