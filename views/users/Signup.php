@@ -13,7 +13,7 @@
 <body>
 <main>
     <h1>Inscription</h1>
-    <form action="../../controllers/signupController.php" method="POST">
+    <form action="/signup" method="POST">
         <label>Nom :
             <input type="text" name="name">
         </label>
@@ -31,7 +31,7 @@
         </label>
         <input type="button" name="submit" value="S'inscrire">
     </form>
-    <button name="login" onclick="window.location.href='Connection.php'">Se connecter</button>
+    <button name="login" onclick="/login">Se connecter</button>
 </main>
 <?php include 'views/tools/footer.php'; ?>
 </body>
