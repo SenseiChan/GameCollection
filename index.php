@@ -2,10 +2,14 @@
 
 require_once 'controllers/ConnectionController.php';
 require_once 'controllers/SignupController.php';
+require_once 'config/Database.php';
+
+
+$pdo = Database::getConnection();
 
 // Création des instances des contrôleurs
-$controllerConnection = new ConnectionController();
-$controllerSignup = new SignupController();
+$controllerConnection = new ConnectionController($pdo);
+$controllerSignup = new SignupController($pdo);
 
 // Définir la route en fonction de l'URL
 $requestUri = $_SERVER['REQUEST_URI'];
