@@ -23,14 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Tous les champs sont requis.");
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM Utilisateur WHERE email = :email");
+    $stmt = $pdo->prepare("SELECT * FROM User WHERE email = :email");
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
+    if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_nom'] = $user['nom'];
-        $_SESSION['user_prenom'] = $user['prenom'];
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_first_name'] = $user['first_name'];
 
         header('Location: index.php');
         exit;

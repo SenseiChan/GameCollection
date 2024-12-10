@@ -16,16 +16,16 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = trim($_POST['nom']);
-    $prenom = trim($_POST['prenom']);
+    $name = trim($_POST['name']);
+    $first_name = trim($_POST['first_name']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    if (empty($nom) || empty($prenom) || empty($email) || empty($password)) {
+    if (empty($name) || empty($first_name) || empty($email) || empty($password)) {
         die("Tous les champs sont requis.");
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM Utilisateur WHERE email = :email");
+    $stmt = $pdo->prepare("SELECT * FROM User WHERE email = :email");
     $stmt->execute(['email' => $email]);
     if ($stmt->rowCount() > 0) {
         die("Cet email est déjà utilisé.");
@@ -33,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("INSERT INTO Utilisateur (nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)");
+    $stmt = $pdo->prepare("INSERT INTO User (name, first_name, email, password) VALUES (:name, :first_name, :email, :password)");
     $stmt->execute([
-        'nom' => $nom,
-        'prenom' => $prenom,
+        'name' => $name,
+        'first_name' => $first_name,
         'email' => $email,
-        'mot_de_passe' => $hashedPassword,
+        'password' => $hashedPassword,
     ]);
 
     echo "Inscription réussie ! Vous pouvez maintenant vous connecter.";
