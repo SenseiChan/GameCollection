@@ -13,7 +13,7 @@
 <body>
 <main>
     <h1>Se connecter à Game Collection</h1>
-    <form action="" method="POST">
+    <form action="/login" method="POST">
         <label> Email :
             <input type="email" name="email">
         </label>
@@ -22,9 +22,9 @@
         </label>
         <input type="button" name="submit" value="Se connecter">
     </form>
-    <button name="signup" onclick="window.location.href='Signup.php'">S'inscrire</button>
+    <button name="signup" onclick="/signup">S'inscrire</button>
 </main>
-<?php include 'footer.php'; ?>
+<?php include 'views/tools/footer.php'; ?>
 </body>
 </html>
 
