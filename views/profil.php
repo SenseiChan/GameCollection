@@ -91,11 +91,11 @@ if (isset($_POST['delete_account'])) {
     </form>
     <form action="" method="POST">
         <!-- Bouton pour supprimer le compte -->
-        <button type="submit" name="delete_account" style="background-color: red; color: white;">Supprimer le compte</button>
+        <button type="submit" name="delete_account" >Supprimer le compte</button>
     </form>
     <form action="" method="POST">
         <!-- Bouton pour se déconnecter -->
-        <button type="submit" name="logout" style="background-color: blue; color: white;">Se déconnecter</button>
+        <button type="submit" name="logout" >Se déconnecter</button>
     </form>
 </main>
 </body>
