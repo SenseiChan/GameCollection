@@ -2,5 +2,7 @@
     "name": "grp3/game-collection",
     "description": "game-collection project",
     "type": "project",
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
