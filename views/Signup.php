@@ -31,7 +31,7 @@
         </label>
         <input type="button" name="submit" value="S'inscrire">
     </form>
-    <button name="login">Se connecter</button>
+    <button name="login" onclick="window.location.href='Connection.php'">Se connecter</button>
 </main>
 </body>
 </html>
