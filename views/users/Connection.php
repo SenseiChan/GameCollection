@@ -24,7 +24,7 @@
     </form>
     <button name="signup" onclick="window.location.href='Signup.php'">S'inscrire</button>
 </main>
-<?php include 'footer.php'; ?>
+<?php include 'views/tools/footer.php'; ?>
 </body>
 </html>
 
