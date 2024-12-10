@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Avaible;
 DROP TABLE IF EXISTS Game;
 DROP TABLE IF EXISTS Platform;
-DROP TABLE IF EXISTS Avaible;
+DROP TABLE IF EXISTS User;
 
-CREATE TABLE Users(
+CREATE TABLE User(
    Id_user INT,
    FirstName_user VARCHAR(100) NOT NULL,
    Email_user VARCHAR(100) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Game(
    TimeIn_game INT NOT NULL,
    Id_user INT NOT NULL,
    PRIMARY KEY(Id_game),
-   FOREIGN KEY(Id_user) REFERENCES Users(Id_user)
+   FOREIGN KEY(Id_user) REFERENCES User(Id_user)
 );
 
 CREATE TABLE Platform(
