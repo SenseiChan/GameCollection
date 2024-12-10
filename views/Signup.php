@@ -14,16 +14,21 @@
 <main>
     <h1>Inscription</h1>
     <form action="" method="POST">
-        <p>Nom :</p>
-        <input type="text" name="name">
-        <p>Prénom :</p>
-        <input type="text" name="first_name">
-        <p>Email :</p>
-        <input type="email" name="email">
-        <p>Mot de passe :</p>
-        <input type="password" name="password">
-        <p>Confirmation du mot de passe :</p>
-        <input type="password" name="confirmation_password">
+        <label>Nom :
+            <input type="text" name="name">
+        </label>
+        <label>Prénom :
+            <input type="text" name="first_name">
+        </label>
+        <label>Email :
+            <input type="email" name="email">
+        </label>
+        <label>Mot de passe :
+            <input type="password" name="password">
+        </label>
+        <label>Confirmation du mot de passe :
+            <input type="password" name="confirmation_password">
+        </label>
         <input type="button" name="submit" value="S'inscrire">
     </form>
     <button name="login">Se connecter</button>
