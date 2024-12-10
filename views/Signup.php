@@ -33,6 +33,7 @@
     </form>
     <button name="login" onclick="window.location.href='Connection.php'">Se connecter</button>
 </main>
+<?php include 'footer.php'; ?>
 </body>
 </html>
 
