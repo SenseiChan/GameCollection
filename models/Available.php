@@ -12,13 +12,13 @@ class Available {
 
     // Ajouter une association entre un jeu et une plateforme
     public static function add($pdo, $id_game, $id_platform) {
-        $stmt = $pdo->prepare("INSERT INTO Avaible (Id_game, Id_platform) VALUES (?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO Available (Id_game, Id_platform) VALUES (?, ?)");
         $stmt->execute([$id_game, $id_platform]);
     }
 
     // Récupérer les plateformes d'un jeu
     public static function getPlatformsByGame($pdo, $id_game) {
-        $stmt = $pdo->prepare("SELECT Platform.Name_platform FROM Avaible INNER JOIN Platform ON Avaible.Id_platform = Platform.Id_platform WHERE Avaible.Id_game = ?");
+        $stmt = $pdo->prepare("SELECT Platform.Name_platform FROM Available INNER JOIN Platform ON Available.Id_platform = Platform.Id_platform WHERE Available.Id_game = ?");
         $stmt->execute([$id_game]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
