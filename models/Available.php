@@ -1,4 +1,5 @@
 <?php
+require_once '../config/Database.php';
 
 class Available {
     private $id_game;
