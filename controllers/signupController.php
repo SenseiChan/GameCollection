@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Tous les champs sont requis.");
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM User WHERE email = :email");
+    $stmt = $pdo->prepare("SELECT * FROM User WHERE Email_user = :email");
     $stmt->execute(['email' => $email]);
     if ($stmt->rowCount() > 0) {
         die("Cet email est déjà utilisé.");
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("INSERT INTO User (name, first_name, email, password) VALUES (:name, :first_name, :email, :password)");
+    $stmt = $pdo->prepare("INSERT INTO User (LastName_user, FistName_user, Email_user, Password_user) VALUES (:name, :first_name, :email, :password)");
     $stmt->execute([
         'name' => $name,
         'first_name' => $first_name,

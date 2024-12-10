@@ -13,7 +13,7 @@
 <body>
 <main>
     <h1>Inscription</h1>
-    <form action="signupController.php" method="POST">
+    <form action="../../controllers/signupController.php" method="POST">
         <label>Nom :
             <input type="text" name="name">
         </label>
