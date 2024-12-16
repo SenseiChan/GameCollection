@@ -41,7 +41,7 @@ class SignupController {
             ]);
 
             echo "Inscription réussie ! Vous pouvez maintenant vous connecter.";
-            header('Location: login.php'); // Redirigez vers la page de connexion
+            header('Location: connection.php'); // Redirigez vers la page de connexion
             exit;
         }
     }
