@@ -36,7 +36,6 @@ input[type="text"] {
     width: 100%;
 }
 
-
 button {
     cursor: pointer;
     background: 0;
@@ -61,12 +60,10 @@ button {
     flex: 1;
 }
 
-
 #form-container form input {
     display: block;
     margin-bottom: 10px;
 }
-
 
 .footer-content {
     text-align: center;
@@ -181,4 +178,3 @@ button {
     font-weight: 900;
     font-style: italic;
 }
-
