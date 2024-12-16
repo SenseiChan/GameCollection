@@ -29,7 +29,7 @@
         <label>Confirmation du mot de passe :
             <input type="password" name="confirmation_password">
         </label>
-        <input type="button" name="submit" value="S'inscrire">
+        <input type="submit" name="submit" value="S'inscrire">
     </form>
     <button name="login" onclick="window.location.href='connection'">Se connecter</button>
 </main>
