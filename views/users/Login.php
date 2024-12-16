@@ -26,7 +26,7 @@
         </label>
         <input type="submit" name="submit" value="Se connecter">
     </form>
-    <button name="signup" onclick="window.location.href='login'">S'inscrire</button>
+    <button name="signup" onclick="window.location.href='Signup'">S'inscrire</button>
     </div>
 </main>
 <?php include 'views/tools/footer.php'; ?>
