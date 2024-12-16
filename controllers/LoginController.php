@@ -2,7 +2,7 @@
 
 require_once 'models/User.php';
 
-class ConnectionController {
+class LoginController {
 
     private $pdo;
 
@@ -11,7 +11,7 @@ class ConnectionController {
     }
 
     public function display() {
-        require 'views/users/Connection.php';
+        require 'views/users/Login.php';
     }
 
     public function handleLogin() {
