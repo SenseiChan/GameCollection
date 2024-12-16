@@ -7,7 +7,7 @@ class SignupController {
         $this->pdo = $pdo;
     }
 
-    public function displaySignup() {
+    public function display() {
         require 'views/users/Signup.php';
     }
 
