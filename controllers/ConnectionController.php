@@ -10,7 +10,7 @@ class ConnectionController {
         $this->pdo = $pdo;
     }
 
-    public function displayConnection() {
+    public function display() {
         require 'views/users/Connection.php';
     }
 

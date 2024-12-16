@@ -1,35 +1,46 @@
 <?php
+// Activer l'affichage des erreurs (à désactiver en production)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require_once 'controllers/ConnectionController.php';
-require_once 'controllers/SignupController.php';
+// Chargement des dépendances
 require_once 'config/Database.php';
 
+// Récupération du paramètre 'url' qui contient l'URL réécrite
+$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+$params = explode('/', $url);
 
+// Détermine le contrôleur et l'action à partir de l'URL
+// Exemple : /login -> Controller = LoginController, Action = index
+//           /login/show -> Controller = LoginController, Action = show
+$controllerName = !empty($params[0]) ? ucfirst($params[0]) . 'Controller' : null;
+$actionName = !empty($params[1]) ? $params[1] : 'display';
+
+// Instancier la connexion à la base de données
 $pdo = Database::getConnection();
 
-// Création des instances des contrôleurs
-$controllerConnection = new ConnectionController($pdo);
-$controllerSignup = new SignupController($pdo);
+// Chemin vers le fichier du contrôleur
+$controllerFile = 'controllers/' . $controllerName . '.php';
 
-// Définir la route en fonction de l'URL
-$requestUri = $_SERVER['REQUEST_URI'];
+// Vérifier si le contrôleur existe
+if (file_exists($controllerFile)) {
+    require_once $controllerFile;
 
-if ($requestUri === '/login' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Afficher la page de connexion
-    $controllerConnection->displayConnection();
-} elseif ($requestUri === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Traiter la soumission du formulaire de connexion
-    $controllerConnection->handleLogin();
-} elseif ($requestUri === '/signup' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Afficher la page d'inscription
-    $controllerSignup->displaySignup();
-} elseif ($requestUri === '/signup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Traiter la soumission du formulaire d'inscription
-    $controllerSignup->handleSignup();
+    // Instancier le contrôleur
+    $controller = new $controllerName($pdo);
+
+    // Vérifier si l'action (méthode) existe dans le contrôleur
+    if (method_exists($controller, $actionName)) {
+        // Appeler l'action avec les paramètres restants
+        $controller->$actionName(array_slice($params, 2));
+    } else {
+        // Action introuvable
+        http_response_code(404);
+        echo "L'action $actionName n'a pas été trouvée dans le contrôleur $controllerName.";
+    }
 } else {
-    // Route par défaut ou erreur 404
+    // Contrôleur introuvable
     http_response_code(404);
-    echo "Page non trouvée.";
+    echo "Le contrôleur $controllerName est introuvable.";
 }
-
-?>

@@ -1,3 +1,21 @@
 body{
     background: #211F2A;
+    font-family: 'Barlow';
+    color: white;
+}
+
+h1{
+    font-weight: 700;
+    font-size: 32px;
+}
+
+label{
+    font-weight: 400;
+    font-size: 16px;
+}
+
+button{
+    background-color: #6757D6;
+    border-radius: 10px;
+    padding: 20px;
 }
