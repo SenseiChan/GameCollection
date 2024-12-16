@@ -22,7 +22,7 @@
         </label>
         <input type="button" name="submit" value="Se connecter">
     </form>
-    <button name="signup" onclick="window.location.href='index.php?url=signup'">S'inscrire</button>
+    <button name="signup" onclick="window.location.href='signup'">S'inscrire</button>
 </main>
 <?php include 'views/tools/footer.php'; ?>
 </body>
