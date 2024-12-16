@@ -1,53 +1,64 @@
 <?php
-session_start();
 
-// Connexion à la base de données
-$host = 'localhost';
-$dbname = 'game-collection';
-$username = 'root';
-$password = '';
+class HomeController {
+    private $pdo;
+    private $userId;
+    private $userFirstName;
+    private $games;
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
-
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    header("Location: connection.php"); // Rediriger vers la page de connexion
-    exit();
-}
-
-$user_id = $_SESSION['user_id'];
-$prenom = ''; // Valeur par défaut pour éviter "Undefined variable"
-
-try {
-    $stmt = $pdo->prepare("SELECT FirstName_user FROM users WHERE id_user = :id");
-    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && !empty($user['FirstName_user'])) {
-        $prenom = htmlspecialchars($user['FirstName_user']);
+    // Le constructeur prend une instance de PDO et l'ID de l'utilisateur connecté
+    public function __construct($pdo, $userId) {
+        $this->pdo = $pdo;
+        $this->userId = $userId;
+        $this->userFirstName = $this->getUserFirstName();
+        $this->games = $this->getUserGames();
     }
-} catch (PDOException $e) {
-    $prenom = ''; // Assigner une valeur par défaut même en cas d'erreur
+
+    // Récupérer le prénom de l'utilisateur
+    private function getUserFirstName() {
+        try {
+            $stmt = $this->pdo->prepare("SELECT FirstName_user FROM users WHERE id_user = :id");
+            $stmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user ? htmlspecialchars($user['FirstName_user']) : '';
+        } catch (PDOException $e) {
+            return ''; // En cas d'erreur, renvoie une chaîne vide
+        }
+    }
+
+    // Récupérer les jeux de l'utilisateur
+    private function getUserGames() {
+        try {
+            $stmt = $this->pdo->prepare("SELECT title, platform, playtime, image_url FROM games WHERE user_id = :id");
+            $stmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("Erreur lors de la récupération des jeux : " . $e->getMessage());
+        }
+    }
+
+    // Fonction pour afficher la page d'accueil
+    public function display() {
+        // Inclure la vue de la page d'accueil (home.php)
+        include 'views/home.php';
+    }
+
+    // Gérer la logique liée à l'affichage des informations utilisateur (prénom et jeux)
+    public function handle() {
+        // Ici, on peut gérer des actions ou des erreurs liées à l'affichage des informations
+        if (empty($this->userFirstName)) {
+            echo "Nom de l'utilisateur non trouvé.";
+            return;
+        }
+
+        // Vérifiez si les jeux de l'utilisateur existent
+        if (empty($this->games)) {
+            echo "Aucun jeu trouvé.";
+            return;
+        }
+    }
 }
 
-
-// Récupérer les jeux de l'utilisateur
-$jeux = [];
-try {
-    $stmt = $pdo->prepare("SELECT title, platform, playtime, image_url FROM games WHERE user_id = :id");
-    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $jeux = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Erreur lors de la récupération des jeux : " . $e->getMessage());
-}
-
-// Inclure la vue HTML
-include 'views/home.php';
 ?>
