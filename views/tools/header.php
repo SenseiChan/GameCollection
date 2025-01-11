@@ -1,18 +1,15 @@
 <header>
     <div class="header-container">
-        <!-- Logo -->
         <div class="logo">
-            <img src="" alt="Logo">
+            <img src="assets/images/logo.svg" alt="Logo" onclick="window.location.href='Home'">
         </div>
 
-        <!-- Navigation -->
         <nav>
             <div class="nav-links">
-                <a href="">Ma bibliothèque</a>
-                <a href="">Ajouter un jeu</a>
-                <a href="">Boutique</a>
-                <a href="">BDE</a>
-                <a href="">FAQ</a>
+                <button onclick="window.location.href='Library'">Ma bibliothèque</button>
+                <button onclick="window.location.href='AddGame'">Ajouter un jeu</button>
+                <button onclick="window.location.href='LeaderBoard'">Classement</button>
+                <button onclick="window.location.href='Profile'">Profil</button>
             </div>
         </nav>
     </div>

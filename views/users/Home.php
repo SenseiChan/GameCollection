@@ -6,6 +6,7 @@
     <title>Home</title>
 </head>
 <body>
+    <?php include 'views/tools/header.php' ;?>
     <main>
         <!-- Message de bienvenue -->
         <section>
@@ -34,5 +35,6 @@
             </div>
         </section>
     </main>
+    <?php include 'views/tools/footer.php'; ?>
 </body>
 </html>
