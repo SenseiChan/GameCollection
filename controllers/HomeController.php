@@ -32,7 +32,7 @@ class HomeController {
     }
 
     public function display() {
-        include 'views/home.php';
+        include 'views/users/Home.php';
     }
 
     public function handle() {
