@@ -15,7 +15,7 @@ class LoginController {
     }
 
     public function handleLogin() {
-        session_start();
+//        session_start();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = trim($_POST['email']);
