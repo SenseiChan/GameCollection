@@ -24,6 +24,7 @@ class Game {
     public static function create($pdo, $name, $url_picture, $url_site, $description, $release_date, $publisher) {
         $stmt = $pdo->prepare("INSERT INTO Game (Name_game, Url_picture, Url_site, Desc_game, Date_game ,Publisher_game) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$name, $url_picture, $url_site, $description, $release_date, $publisher]);
+        return $pdo->lastInsertId();
     }
 
     // Récupérer les jeux d'un utilisateur
