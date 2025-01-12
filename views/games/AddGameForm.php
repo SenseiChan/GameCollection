@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php include 'views/tools/header.php' ;?>
-    <main>
+    <main id="add-game-form-main">
         <h1>Ajout d'un jeu</h1>
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
             <p style="color: green; font-weight: bold;">Le jeu a été ajouté avec succès !</p>
@@ -31,13 +31,15 @@
                 <input type="date" name="release_date" required>
             </label>
             <br>
-            <?php foreach ($platforms as $platform): ?>
-                <label>
-                    <input type="checkbox" name="platforms[]" value="<?php echo htmlspecialchars($platform['Id_platform']); ?>">
-                    <?php echo htmlspecialchars($platform['Name_platform']); ?>
-                </label>
-                <br>
-            <?php endforeach; ?>
+            <?php if (!empty($platforms)) {
+                foreach ($platforms as $platform): ?>
+                    <label>
+                        <input type="checkbox" name="platforms[]" value="<?php echo htmlspecialchars($platform['Id_platform']); ?>">
+                        <?php echo htmlspecialchars($platform['Name_platform']); ?>
+                    </label>
+                    <br>
+                <?php endforeach;
+            } ?>
             <br>
             <label>Description du jeu
                 <textarea name="description" required></textarea>
