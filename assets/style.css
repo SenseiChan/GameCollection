@@ -12,6 +12,15 @@ body{
 h1{
     font-weight: bold;
     font-size: 32px;
+    line-height: 35px;
+}
+
+header {
+    display: inline-block;
+}
+
+nav {
+    margin-left: auto;
 }
 
 input[type="submit"],
@@ -48,6 +57,10 @@ button {
     padding: 10px;
 }
 
+button:hover {
+    color: #6757D6;
+}
+
 #form-container {
     background-color: #252836;
     border-radius: 10px;
@@ -66,9 +79,13 @@ button {
     margin-bottom: 10px;
 }
 
-.footer-content {
+#footer-content {
     text-align: center;
     flex: 2;
+}
+
+#home-page-welcome {
+    background-image: url("assets/images/welcome_image.png");
 }
 
 /* Fonts */
