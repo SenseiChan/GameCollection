@@ -185,22 +185,38 @@ tbody td:nth-child(3) {
 }
 
 .game-card-add {
+    position: relative;
     border-radius: 10px;
-    /*padding: 20px;*/
-    /*margin: 10em auto;*/
     height: 15em;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    overflow: hidden;
 }
 
 .game-info {
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+
+.game-info p {
+    color: lightgrey;
 }
 
 .gradient-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
 }
 
 /* Fonts */
