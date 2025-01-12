@@ -13,7 +13,7 @@ class HomeController {
         $this->pdo = $pdo;
         $this->userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         $this->userFirstName = $this->getUserFirstName();
-        $this->games = $this->getUserGames();
+        $this->games = $this->getGamesByUser();
     }
 
     private function getUserFirstName() {
