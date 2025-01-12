@@ -51,7 +51,7 @@ class Library {
         $stmt->execute([
             'user_id' => $userId,
             'game_id' => $gameId,
-            'time_played' => $timePlayed ?? '1970-01-01 00:00:00',
+            'time_played' => $timePlayed ?? '00:00:00',
         ]);
     }    
 
