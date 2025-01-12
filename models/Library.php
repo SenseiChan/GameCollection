@@ -45,10 +45,15 @@ class Library {
     }
 
     // Add a game to an user
-    public static function addGame($pdo, $id_user, $id_game, $time_played) {
-        $stmt = $pdo->prepare("INSERT INTO Library (Id_user, Id_game, Time_played) VALUES (?, ?, ?)");
-        $stmt->execute([$id_user, $id_game, $time_played]);
-    }
+    public static function addGame($pdo, $userId, $gameId, $timePlayed = null) {
+        $query = "INSERT INTO Library (Id_user, Id_game, Time_played) VALUES (:user_id, :game_id, :time_played)";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([
+            'user_id' => $userId,
+            'game_id' => $gameId,
+            'time_played' => $timePlayed ?? '1970-01-01 00:00:00',
+        ]);
+    }    
 
     // Get all games of an user
     public static function getGamesByUser($pdo, $id_user) {
