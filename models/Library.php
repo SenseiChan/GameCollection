@@ -7,7 +7,7 @@ class Library {
     private $id_game;
     private $time_played;
 
-    public function __construct($id_user = null, $id_game = null, $time_played = null,$pdo) {
+    public function __construct($pdo,$id_user = null, $id_game = null, $time_played = null) {
         $this->pdo = $pdo;
         $this->id_user = $id_user;
         $this->id_game = $id_game;
