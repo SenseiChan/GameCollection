@@ -17,7 +17,7 @@
 <main>
     <div id="form-container">
     <h1>Se connecter à Game Collection</h1>
-    <form action="/login" method="POST">
+    <form action="/login/handleLogin" method="POST">
         <label> Email :
             <input type="email" name="email">
         </label>

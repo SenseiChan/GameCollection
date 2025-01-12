@@ -26,16 +26,16 @@ class LoginController {
                 return;
             }
 
-            $stmt = $this->pdo->prepare("SELECT * FROM User WHERE email = :email");
+            $stmt = $this->pdo->prepare("SELECT * FROM User WHERE Email_user = :email");
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch();
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_name'] = $user['name'];
-                $_SESSION['user_first_name'] = $user['first_name'];
+            if ($user && password_verify($password, $user['Password_user'])) {
+                $_SESSION['user_id'] = $user['Id_user'];
+                $_SESSION['user_name'] = $user['LastName_user'];
+                $_SESSION['user_first_name'] = $user['FirstName_user'];
 
-                header('Location: index.php');
+                header('Location: /home');
                 exit;
             } else {
                 echo "Email ou mot de passe incorrect.";

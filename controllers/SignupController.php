@@ -8,7 +8,7 @@ class SignupController {
     }
 
     public function display() {
-        require 'views/users/Signup.php';
+        require_once __DIR__ . '/../views/users/Signup.php';
     }
 
     public function handleSignup() {
@@ -32,7 +32,7 @@ class SignupController {
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $this->pdo->prepare("INSERT INTO User (LastName_user, FistName_user, Email_user, Password_user) VALUES (:name, :first_name, :email, :password)");
+            $stmt = $this->pdo->prepare("INSERT INTO User (LastName_user, FirstName_user, Email_user, Password_user) VALUES (:name, :first_name, :email, :password)");
             $stmt->execute([
                 'name' => $name,
                 'first_name' => $first_name,
@@ -41,7 +41,7 @@ class SignupController {
             ]);
 
             echo "Inscription réussie ! Vous pouvez maintenant vous connecter.";
-            header('Location: connection.php'); // Redirigez vers la page de connexion
+            header('Location: /login');
             exit;
         }
     }

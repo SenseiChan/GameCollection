@@ -12,41 +12,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-<main>
-    <h1>Mon Profil</h1>
-    <?php if ($id): ?>
-        <form action="" method="POST">
-            <label> Prénom :
-                <input type="text" name="prenom" value="<?php echo htmlspecialchars($Prenom); ?>">
-            </label>
-            <br>
-            <label> Nom :
-                <input type="text" name="nom" value="<?php echo htmlspecialchars($Nom); ?>">
-            </label>
-            <br>
-            <label> Email :
-                <input type="email" name="email" value="<?php echo htmlspecialchars($Email); ?>">
-            </label>
-            <br>
-            <label> Mot de passe :
-                <input type="password" name="password">
-            </label>
-            <br>
-            <input type="submit" name="submit" value="Mettre à jour">
-        </form>
-        <form action="" method="POST">
-            <button type="submit" name="delete_account">Supprimer le compte</button>
-        </form>
-        <form action="" method="POST">
-            <button type="submit" name="logout">Se déconnecter</button>
-        </form>
-    <?php else: ?>
-        <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à votre profil.</p>
-        <form action="connection.php" method="GET">
-            <button type="submit">Se connecter</button>
-        </form>
-    <?php endif; ?>
-</main>
+    <?php include 'views/tools/header.php' ;?>
+    <main>
+        <h1>Mon Profil</h1>
+        <?php if (isset($id) && $id): ?>
+            <form action="/profile/handleUpdateProfile" method="POST">
+                <label> Prénom :
+                    <input type="text" name="prenom" value="<?php echo htmlspecialchars($Prenom); ?>">
+                </label>
+                <br>
+                <label> Nom :
+                    <input type="text" name="nom" value="<?php echo htmlspecialchars($Nom); ?>">
+                </label>
+                <br>
+                <label> Email :
+                    <input type="email" name="email" value="<?php echo htmlspecialchars($Email); ?>">
+                </label>
+                <br>
+                <label> Mot de passe :
+                    <input type="password" name="password">
+                </label>
+                <br>
+                <input type="submit" name="submit" value="Modifier">
+            </form>
+            <form action="/profile/handleDeleteAccount" method="POST">
+                <button type="submit" name="delete_account">Supprimer mon compte</button>
+            </form>
+            <form action="/profile/handleLogout" method="POST">
+                <button type="submit" name="logout">Se déconnecter</button>
+            </form>
+        <?php else: ?>
+            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à votre profil.</p>
+            <form action="connection.php" method="GET">
+                <button type="submit">Se connecter</button>
+            </form>
+        <?php endif; ?>
+    </main>
+    <?php include 'views/tools/footer.php'; ?>
 </body>
 </html>
 

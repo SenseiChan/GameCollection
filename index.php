@@ -1,5 +1,5 @@
 <?php
-// Activer l'affichage des erreurs (à désactiver en production)
+// Activer l'affichage des erreurs
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -14,11 +14,26 @@ require_once 'config/Database.php';
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 $params = explode('/', $url);
 
+// Vérifier si l'utilisateur est connecté
+$isLoggedIn = isset($_SESSION['user_id']);
+
 // Détermine le contrôleur et l'action à partir de l'URL
-// Exemple : /login -> Controller = LoginController, Action = index
-//           /login/show -> Controller = LoginController, Action = show
-$controllerName = !empty($params[0]) ? ucfirst($params[0]) . 'Controller' : null;
-$actionName = !empty($params[1]) ? $params[1] : 'display';
+if (empty($url)) {
+    // Si aucune URL n'est spécifiée
+    if (!$isLoggedIn) {
+        // Redirigez les utilisateurs non connectés vers LoginController
+        $controllerName = 'LoginController';
+        $actionName = 'display';
+    } else {
+        // Redirigez les utilisateurs connectés vers HomeController
+        $controllerName = 'HomeController';
+        $actionName = 'display';
+    }
+} else {
+    // Sinon, utilisez le contrôleur et l'action spécifiés dans l'URL
+    $controllerName = ucfirst($params[0]) . 'Controller';
+    $actionName = !empty($params[1]) ? $params[1] : 'display';
+}
 
 // Instancier la connexion à la base de données
 $pdo = Database::getConnection();
@@ -30,8 +45,20 @@ $controllerFile = 'controllers/' . $controllerName . '.php';
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
 
-    // Instancier le contrôleur
-    $controller = new $controllerName($pdo);
+    // Vérification spéciale pour ProfileController, qui attend un userId
+    if ($controllerName === 'ProfileController') {
+        if ($isLoggedIn) {
+            $userId = $_SESSION['user_id'];
+            $controller = new $controllerName($pdo, $userId);
+        } else {
+            // Redirigez vers la page de connexion si l'utilisateur n'est pas connecté
+            header('Location: /login');
+            exit;
+        }
+    } else {
+        // Instancier les autres contrôleurs avec seulement le $pdo
+        $controller = new $controllerName($pdo);
+    }
 
     // Vérifier si l'action (méthode) existe dans le contrôleur
     if (method_exists($controller, $actionName)) {
