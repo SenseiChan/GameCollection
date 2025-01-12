@@ -14,9 +14,16 @@ class ProfileController {
     }
 
     public function display() {
-        // Inclure la vue pour afficher le profil utilisateur
+        // Préparez les données utilisateur
+        $id = $this->userId;
+        $Prenom = $this->prenom;
+        $Nom = $this->nom;
+        $Email = $this->email;
+    
+        // Chargez la vue avec les variables nécessaires
         require_once __DIR__ . '/../views/users/Profile.php';
-    }    
+    }
+     
 
     // Charger les données de l'utilisateur à partir de la base de données
     private function loadUserData() {

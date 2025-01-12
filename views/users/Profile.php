@@ -14,7 +14,7 @@
 <body>
 <main>
     <h1>Mon Profil</h1>
-    <?php if ($id): ?>
+    <?php if (isset($id) && $id): ?>
         <form action="" method="POST">
             <label> Prénom :
                 <input type="text" name="prenom" value="<?php echo htmlspecialchars($Prenom); ?>">
