@@ -16,28 +16,36 @@
     <main>
         <h1>Ajout d'un jeu</h1>
         <form action="/addGameForm/add" method="POST">
-            <label>Nom du jeu :
+            <label>Nom du jeu
                 <input type="text" name="name" required>
             </label>
             <br>
-            <label>URL de l'image :
-                <input type="text" name="url_picture" required>
+            <label>Editeur du jeu
+                <input type="text" name="publisher" required>
             </label>
             <br>
-            <label>URL du site officiel :
-                <input type="text" name="url_site" required>
-            </label>
-            <br>
-            <label>Description :
-                <textarea name="description" required></textarea>
-            </label>
-            <br>
-            <label>Date de sortie :
+            <label>Sortie du jeu
                 <input type="date" name="release_date" required>
             </label>
             <br>
-            <label>Éditeur :
-                <input type="text" name="publisher" required>
+            <?php foreach ($platforms as $platform): ?>
+                <label>
+                    <input type="checkbox" name="platforms[]" value="<?php echo htmlspecialchars($platform['id']); ?>">
+                    <?php echo htmlspecialchars($platform['name']); ?>
+                </label>
+                <br>
+            <?php endforeach; ?>
+            <br>
+            <label>Description du jeu
+                <textarea name="description" required></textarea>
+            </label>
+            <br>
+            <label>URL de la cover
+                <input type="text" name="url_picture" required>
+            </label>
+            <br>
+            <label>URL du site
+                <input type="text" name="url_site" required>
             </label>
             <br>
             <input type="submit" name="submit" value="Ajouter">

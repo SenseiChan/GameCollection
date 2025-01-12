@@ -1,6 +1,7 @@
 <?php
 require_once 'models/Game.php';
 require_once 'models/Library.php';
+require_once 'models/Platform.php';
 
 class AddGameFormController {
     private $pdo;
@@ -14,6 +15,8 @@ class AddGameFormController {
             header('Location: /login');
             exit;
         }
+        $platformModel = new Platform($this->pdo);
+        $platforms = $platformModel->getAll();
         require 'views/games/AddGameForm.php';
     }
 
@@ -21,18 +24,23 @@ class AddGameFormController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             // Récupérer les données du formulaire
             $name = trim($_POST['name']);
+            $publisher = trim($_POST['publisher']);
+            $releaseDate = trim($_POST['release_date']);
+            $description = trim($_POST['description']);
             $urlPicture = trim($_POST['url_picture']);
             $urlSite = trim($_POST['url_site']);
-            $description = trim($_POST['description']);
-            $releaseDate = trim($_POST['release_date']);
-            $publisher = trim($_POST['publisher']);
+            $platformIds = isset($_POST['platforms']) ? $_POST['platforms'] : [];
             // Vérifier que tous les champs sont remplis
-            if (!empty($name) && !empty($urlPicture) && !empty($urlSite) && !empty($description) && !empty($releaseDate) && !empty($publisher)) {
+            if (!empty($name) && !empty($publisher) && !empty($releaseDate) && !empty($description) && !empty($urlPicture) && !empty($urlSite)) {
                 try {
-                    // Appeler la méthode create du modèle Game
-                    Game::create($this->pdo, $name, $urlPicture, $urlSite, $description, $releaseDate, $publisher);
+                    // Ajouter le jeu dans la table Game
+                    $gameId = Game::create($this->pdo, $name, $urlPicture, $urlSite, $description, $releaseDate, $publisher);
 
-                    // Rediriger avec un message de succès
+                    // Ajouter les relations plateforme-jeu dans la table Available
+                    foreach ($platformIds as $platformId) {
+                        Available::add($this->pdo, $gameId, $platformId);
+                    }
+
                     header('Location: /addGameForm?success=1');
                     exit;
                 } catch (PDOException $e) {
