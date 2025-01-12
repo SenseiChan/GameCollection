@@ -42,6 +42,8 @@ class AddGameFormController {
                         Available::add($this->pdo, $gameId, $platformId);
                     }
 
+                    Library::addGame($this->pdo, $_SESSION['user_id'],$gameId, 0);
+
                     header('Location: /addGameForm?success=1');
                     exit;
                 } catch (PDOException $e) {
