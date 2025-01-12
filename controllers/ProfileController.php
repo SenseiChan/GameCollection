@@ -49,8 +49,6 @@ class ProfileController {
     // Gérer la mise à jour du profil utilisateur
     public function handleUpdateProfile($data) {  
         if ($this->userId && isset($data['submit'])) {
-            var_dump($data);
-            exit;
             $newPrenom = trim($data['prenom']);
             $newNom = trim($data['nom']);
             $newEmail = trim($data['email']);
