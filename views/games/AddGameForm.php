@@ -15,36 +15,33 @@
     <?php include 'views/tools/header.php' ;?>
     <main>
         <h1>Ajout d'un jeu</h1>
-        <form action="/profile/handleUpdateProfile" method="POST">
+        <form action="/addGameForm/add" method="POST">
             <label>Nom du jeu :
-                <input type="text" name="Nom du jeu">
+                <input type="text" name="name" required>
             </label>
             <br>
-            <label>Éditeur du jeu :
-                <input type="text" name="editeur">
+            <label>URL de l'image :
+                <input type="text" name="url_picture" required>
             </label>
             <br>
-            <label>Sortie du jeu :
-                <input type="date" name="date de sortie">
-            </label>
-            <br>
-            <label>a faire :
-                <input type="text" name="Nom du jeu">
+            <label>URL du site officiel :
+                <input type="text" name="url_site" required>
             </label>
             <br>
             <label>Description :
-                <input type="text" name="description">
+                <textarea name="description" required></textarea>
             </label>
             <br>
-            <label>Url de la cover :
-                <input type="text" name="URL1">
+            <label>Date de sortie :
+                <input type="date" name="release_date" required>
             </label>
             <br>
-            <label>Url du site :
-                <input type="text" name="URL site">
+            <label>Éditeur :
+                <input type="text" name="publisher" required>
             </label>
             <br>
             <input type="submit" name="submit" value="Ajouter">
+        </form>
     </main>
     <?php include 'views/tools/footer.php'; ?>
 </body>
