@@ -36,10 +36,10 @@
                 <input type="submit" name="submit" value="Modifier">
             </form>
             <form action="/profile/handleDeleteAccount" method="POST">
-                <button type="submit" name="delete_account">Supprimer mon compte</button>
+                <input type="submit" name="delete_account">Supprimer mon compte
             </form>
             <form action="/profile/handleLogout" method="POST">
-                <button type="submit" name="logout">Se déconnecter</button>
+                <input type="submit" name="logout">Se déconnecter
             </form>
         <?php else: ?>
             <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à votre profil.</p>
