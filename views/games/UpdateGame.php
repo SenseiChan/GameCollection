@@ -19,28 +19,22 @@
             } ?></h2>
         <div class="game-collection">
             <div class="game-specification">
-                <img src="<?php echo htmlspecialchars($game['Url_picture']); ?>" alt="Image du jeu">
-                <p><?php echo htmlspecialchars($game['Desc_game']); ?></p>
-                <p>Temps passé : <?php echo htmlspecialchars($game['Time_played']); ?></p>
+                <img src="<?php echo htmlspecialchars($game['Url_picture'] ?? 'default-image.jpg'); ?>" alt="Image du jeu">
+                <p><?php echo htmlspecialchars($game['Desc_game'] ?? ''); ?></p>
+                <p>Temps passé : <?php echo htmlspecialchars($game['Time_played'] ?? 0); ?></p>
                 <h3>Ajouter du temps passé sur le jeu</h3>
-                <label> Temps passé sur le jeu :
-                    <input type="text" name="Temps" value="<?php echo htmlspecialchars($game['Time_played']); ?>">
-                </label>
                 <form method="POST" action="/library/handleupdate">
-
-                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
-                            <button type="submit">Ajouter</button>
+                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['Id_game'] ?? ''); ?>">
+                    <label>Temps passé sur le jeu :
+                        <input type="text" name="time_played" value="<?php echo htmlspecialchars($game['Time_played'] ?? 0); ?>">
+                    </label>
+                    <button type="submit">Ajouter</button>
                 </form>
-<<<<<<< HEAD
                 <form method="POST" action="/library/deleteGame">
-                            <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
-=======
-                <form method="POST" action="/library/handledelete">
-                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
->>>>>>> f4919732e70d0ed425df32b4abc35153039dfb8d
-                            <button type="submit">Supprimer le jeu de ma bibliothèque</button>
+                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['Id_game'] ?? ''); ?>">
+                    <button type="submit">Supprimer le jeu de ma bibliothèque</button>
                 </form>
-             </div>
+            </div>
         </div>
     </section>
 </main>

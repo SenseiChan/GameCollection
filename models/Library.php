@@ -17,14 +17,14 @@ class Library {
     public function getGameById($gameId) {
         $query = "
             SELECT 
-                Game.Id_game, 
+                Game.Id_game AS Id_game, 
                 Game.Name_game, 
                 Game.Url_picture, 
                 Game.Desc_game, 
                 Library.Time_played
             FROM Library
             INNER JOIN Game ON Library.Id_game = Game.Id_game
-            WHERE Game.Id_game = :game_id
+            WHERE Library.Id_game = :game_id
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute(['game_id' => $gameId]);
