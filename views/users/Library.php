@@ -24,14 +24,18 @@
     </section>
     <section id="home-page-games">
         <h2>Mes jeux</h2>
-        <div class="game-collection">
+        <div class="games-grid">
             <?php if (!empty($games)) : ?>
                 <?php foreach ($games as $game) : ?>
-                    <div class="game-card">
-                        <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
-                        <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
-                        <p><?php echo htmlspecialchars($game['platforms']); ?></p>
-                        <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
+                    <div class="game-card" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
+                        <div class="gradient-overlay">
+                            <div class="game-info">
+<!--                                <img src="--><?php //echo htmlspecialchars($game['url_picture']); ?><!--" alt="Image du jeu">-->
+                                <h1><?php echo htmlspecialchars($game['Name_game']); ?></h1>
+                                <p><?php echo htmlspecialchars($game['platforms']); ?></p>
+                                <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
+                            </div>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php else : ?>

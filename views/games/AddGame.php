@@ -28,7 +28,7 @@
             <div class="games-grid">
                 <?php if (!empty($games)) {
                     foreach ($games as $game): ?>
-                    <div class="game-card-add" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
+                    <div class="game-card" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
                         <div class="gradient-overlay">
                             <div class="game-info">
                                 <h1><?php echo htmlspecialchars($game['Name_game']); ?></h1>

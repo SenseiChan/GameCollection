@@ -184,7 +184,7 @@ tbody td:nth-child(3) {
     padding: 1em;
 }
 
-.game-card-add {
+.game-card {
     position: relative;
     border-radius: 10px;
     height: 15em;
