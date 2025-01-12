@@ -32,7 +32,7 @@ class AddGameFormController {
             $urlSite = trim($_POST['url_site']);
             $platformIds = isset($_POST['platforms']) ? $_POST['platforms'] : [];
             // Vérifier que tous les champs sont remplis
-            if (!empty($name) && !empty($publisher) && !empty($releaseDate) && !empty($description) && !empty($urlPicture) && !empty($urlSite)) {
+            if (!empty($name) && !empty($publisher) && !empty($releaseDate) && !empty($description) && !empty($urlPicture) && !empty($urlSite) && !empty($platformIds)) {
                 try {
                     // Ajouter le jeu dans la table Game
                     $gameId = Game::create($this->pdo, $name, $urlPicture, $urlSite, $description, $releaseDate, $publisher);
