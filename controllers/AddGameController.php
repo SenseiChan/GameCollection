@@ -1,5 +1,5 @@
 <?php
-class AddGameFormController {
+class AddGameController {
     public function __construct($pdo) {
     }
 
@@ -8,7 +8,7 @@ class AddGameFormController {
             header('Location: /login');
             exit;
         }
-        require 'views/games/AddGameForm.php';
+        require 'views/games/AddGame.php';
     }
 }
 ?>
