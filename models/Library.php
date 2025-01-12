@@ -1,0 +1,47 @@
+<?php
+require_once 'config/Database.php';
+
+class Game {
+    private $id_user;
+    private $id_game;
+    private $time_played;
+
+    public function __construct($id_user = null, $id_game = null, $time_played = null) {
+        $this->id_user = $id_user;
+        $this->id_game = $id_game;
+        $this->time_played = $time_played;
+    }
+
+    // Add a game to an user
+    public static function addGame($pdo, $id_user, $id_game, $time_played) {
+        $stmt = $pdo->prepare("INSERT INTO Library (Id_user, Id_game, Time_played) VALUES (?, ?, ?)");
+        $stmt->execute([$id_user, $id_game, $time_played]);
+    }
+
+    // Get all games of an user
+    public static function getGamesByUser($pdo, $id_user) {
+        $stmt = $pdo->prepare("SELECT Game.Name_game, Library.Time_played, Game.url_picture, GROUP_CONCAT(Platform.Name_platform SEPARATOR ', ') AS platforms FROM Library INNER JOIN Game ON Library.Id_game = Game.Id_game LEFT JOIN Available ON Game.Id_game = Available.Id_game LEFT JOIN Platform ON Available.Id_platform = Platform.Id_platform WHERE Library.Id_user = ? GROUP BY Game.Id_game, Library.Time_played, Game.url_picture;");
+        $stmt->execute([$id_user]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Update the time played of a game by an user
+    public static function updateTimePlayed($pdo, $id_user, $id_game, $time_played) {
+        $stmt = $pdo->prepare("UPDATE Library SET Time_played = ? WHERE Id_user = ? AND Id_game = ?");
+        $stmt->execute([$time_played, $id_user, $id_game]);
+    }
+
+    // Delete a game from an user
+    public static function deleteGame($pdo, $id_user, $id_game) {
+        $stmt = $pdo->prepare("DELETE FROM Library WHERE Id_user = ? AND Id_game = ?");
+        $stmt->execute([$id_user, $id_game]);
+    }
+
+    // Get the leaderboard of time played
+
+
+
+
+}
+
+?>
