@@ -38,34 +38,36 @@ class ProfileController {
 
     // Handle user profile update
     public function handleUpdateProfile($data) {
-        if ($this->userId && isset($data['submit'])) {
+        try {
             $newFirstName = trim($data['firstName']);
             $newLastName = trim($data['lastName']);
             $newEmail = trim($data['email']);
             $newPassword = trim($data['password']);
             $confirmPassword = trim($data['confirmPassword']);
+        } catch (Exception $e) {
+            echo "<p>Error updating profile: " . $e->getMessage() . "</p>";
+        }
 
+        if ($newPassword == $confirmPassword) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            try {
+                User::update($this->pdo, $this->userId, $newFirstName, $newLastName, $newEmail, $newPassword);
 
-            if ($newPassword == $confirmPassword) {
-                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                try {
-                    User::update($this->pdo, $this->userId, $newFirstName, $newLastName, $newEmail, $newPassword);
+                // Update instance variables
+                $this->firstName = $newFirstName;
+                $this->lastName = $newLastName;
+                $this->email = $newEmail;
 
-                    // Update instance variables
-                    $this->firstName = $newFirstName;
-                    $this->lastName = $newLastName;
-                    $this->email = $newEmail;
-
-                    // Redirect to profile page with success message
-                    header('Location: /profile');
-                    exit;
-                } catch (PDOException $e) {
-                    // Display error
-                    echo "<p>Error updating profile: " . $e->getMessage() . "</p>";
-                }
+                // Redirect to profile page with success message
+                header('Location: /profile');
+                exit;
+            } catch (PDOException $e) {
+                // Display error
+                echo "<p>Error updating profile: " . $e->getMessage() . "</p>";
             }
-        } else {
-            echo "<p>Error: Invalid data submitted or user not logged in.</p>";
+        }
+        else {
+            echo "Passwords do not match";
         }
     }
 
