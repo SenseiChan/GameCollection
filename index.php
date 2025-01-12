@@ -4,76 +4,55 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Démarre la session
-session_start();
+session_start(); // Démarrage de la session
 
-// Chargement des dépendances
-require_once 'config/Database.php';
+require_once 'config/Database.php'; // Chargement de la configuration de la base de données
 
-// Récupération du paramètre 'url' qui contient l'URL réécrite
+// Récupération de l'URL réécrite
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 $params = explode('/', $url);
 
-// Vérifier si l'utilisateur est connecté
+// Vérification de la connexion de l'utilisateur
 $isLoggedIn = isset($_SESSION['user_id']);
 
-// Détermine le contrôleur et l'action à partir de l'URL
+// Déterminer le contrôleur et l'action
 if (empty($url)) {
-    // Si aucune URL n'est spécifiée
-    if (!$isLoggedIn) {
-        // Redirigez les utilisateurs non connectés vers LoginController
-        $controllerName = 'LoginController';
-        $actionName = 'display';
-    } else {
-        // Redirigez les utilisateurs connectés vers HomeController
-        $controllerName = 'HomeController';
-        $actionName = 'display';
-    }
+    $controllerName = $isLoggedIn ? 'HomeController' : 'LoginController';
+    $actionName = 'display';
 } else {
-    // Sinon, utilisez le contrôleur et l'action spécifiés dans l'URL
     $controllerName = ucfirst($params[0]) . 'Controller';
     $actionName = !empty($params[1]) ? $params[1] : 'display';
 }
 
-// Instancier la connexion à la base de données
-$pdo = Database::getConnection();
-
-// Chemin vers le fichier du contrôleur
+$pdo = Database::getConnection(); // Connexion à la base de données
 $controllerFile = 'controllers/' . $controllerName . '.php';
 
-// Vérifier si le contrôleur existe
-if (!$isLoggedIn) {
-    header('Location: /login');
-}
-else if (file_exists($controllerFile)) {
+if (!$isLoggedIn && $controllerName !== 'SignupController' && $controllerName !== 'LoginController') {
+    (new LoginController($pdo))->display(); // Redirection vers la page de connexion si non connecté
+} elseif (file_exists($controllerFile)) {
     require_once $controllerFile;
 
-    // Vérification spéciale pour ProfileController, qui attend un userId
+    // Gestion spécifique pour le ProfileController
     if ($controllerName === 'ProfileController') {
         if ($isLoggedIn) {
             $userId = $_SESSION['user_id'];
             $controller = new $controllerName($pdo, $userId);
         } else {
-            // Redirigez vers la page de connexion si l'utilisateur n'est pas connecté
-            header('Location: /login');
+            header('Location: /login'); // Redirection vers la page de connexion si non connecté
             exit;
         }
     } else {
-        // Instancier les autres contrôleurs avec seulement le $pdo
-        $controller = new $controllerName($pdo);
+        $controller = new $controllerName($pdo); // Instanciation du contrôleur
     }
 
-    // Vérifier si l'action (méthode) existe dans le contrôleur
+    // Exécution de l'action si elle existe
     if (method_exists($controller, $actionName)) {
-        // Appeler l'action avec les paramètres restants
         $controller->$actionName(array_slice($params, 2));
     } else {
-        // Action introuvable
         http_response_code(404);
         echo "L'action $actionName n'a pas été trouvée dans le contrôleur $controllerName.";
     }
 } else {
-    // Contrôleur introuvable
     http_response_code(404);
     echo "Le contrôleur $controllerName est introuvable.";
 }
