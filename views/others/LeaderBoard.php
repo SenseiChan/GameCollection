@@ -21,18 +21,20 @@
             <th>Jeu favori</th>
         </tr>
     </thead>
-<!--    Valeurs temporaires exemples -->
     <tbody >
+<?php if (!empty($leaderboard)) : ?>
+    <?php foreach ($leaderboard as $entry) : ?>
         <tr>
-            <td>Marcel Guillaume</td>
-            <td>172h</td>
-            <td>GTA V</td>
+            <td><?php echo htmlspecialchars($entry['user']); ?></td>
+            <td><?php echo htmlspecialchars($entry['total_time_played']); ?> h</td>
+            <td><?php echo htmlspecialchars($entry['most_played_game']); ?></td>
         </tr>
-        <tr>
-            <td>Marcel Guillaume</td>
-            <td>172h</td>
-            <td>GTA V</td>
-        </tr>
+    <?php endforeach; ?>
+<?php else : ?>
+    <tr>
+        <td colspan="3">Aucun résultat trouvé.</td>
+    </tr>
+<?php endif; ?>
     </tbody>
 </table>
 

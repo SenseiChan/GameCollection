@@ -38,7 +38,7 @@ class Library {
     }
 
     // Get the leaderboard of time played (LIMIT 20)
-    public static function getLeaderbBoard($pdo) {
+    public static function getLeaderBoard($pdo) {
         $stmt = $pdo->prepare("
     SELECT 
         CONCAT(User.FirstName_user, ' ', User.LastName_user) AS user, 
