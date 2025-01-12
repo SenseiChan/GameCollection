@@ -14,6 +14,23 @@ class Library {
         $this->time_played = $time_played;
     }
 
+    public function getGameById($gameId) {
+        $query = "
+            SELECT 
+                Game.Id_game, 
+                Game.Name_game, 
+                Game.Url_picture, 
+                Game.Desc_game, 
+                Library.Time_played
+            FROM Library
+            INNER JOIN Game ON Library.Id_game = Game.Id_game
+            WHERE Game.Id_game = :game_id
+        ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['game_id' => $gameId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }    
+
     // Récupérer tous les jeux disponibles
     public function getAllGames() {
         $query = "

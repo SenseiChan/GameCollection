@@ -27,7 +27,7 @@
         <div class="game-collection">
             <?php if (!empty($games)) : ?>
                 <?php foreach ($games as $game) : ?>
-                    <div class="game-card">
+                    <a href="/UpdateGame?game_id=<?php echo htmlspecialchars($game['Id_game']); ?>" class="game-card">
                         <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
                         <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
                         <p><?php echo htmlspecialchars($game['platforms']); ?></p>
