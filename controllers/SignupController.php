@@ -8,7 +8,7 @@ class SignupController {
     }
 
     public function display() {
-        require 'views/users/Signup.php';
+        require_once __DIR__ . '/../views/users/Signup.php';
     }
 
     public function handleSignup() {

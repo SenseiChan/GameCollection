@@ -17,7 +17,7 @@
 <main>
     <div id="form-container">
     <h1>Inscription</h1>
-    <form action="/signup?controller=signup&action=register" method="POST">
+    <form action="/signup?controller=signup&action=handleSignup" method="POST">
             <label>Nom :
                 <input type="text" name="name">
             </label>
