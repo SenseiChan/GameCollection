@@ -74,7 +74,7 @@ class Library {
 
     // Get all games of an user
     public static function getGamesByUser($pdo, $id_user) {
-        $stmt = $pdo->prepare("SELECT Game.Name_game, Library.Time_played, Game.url_picture, GROUP_CONCAT(Platform.Name_platform SEPARATOR ', ') AS platforms FROM Library INNER JOIN Game ON Library.Id_game = Game.Id_game LEFT JOIN Available ON Game.Id_game = Available.Id_game LEFT JOIN Platform ON Available.Id_platform = Platform.Id_platform WHERE Library.Id_user = ? GROUP BY Game.Id_game, Library.Time_played, Game.url_picture;");
+        $stmt = $pdo->prepare("SELECT Game.Id_game, Game.Name_game, Library.Time_played, Game.Url_picture, GROUP_CONCAT(Platform.Name_platform SEPARATOR ', ') AS platforms FROM Library INNER JOIN Game ON Library.Id_game = Game.Id_game LEFT JOIN Available ON Game.Id_game = Available.Id_game LEFT JOIN Platform ON Available.Id_platform = Platform.Id_platform WHERE Library.Id_user = ? GROUP BY Game.Id_game, Library.Time_played, Game.url_picture;");
         $stmt->execute([$id_user]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
