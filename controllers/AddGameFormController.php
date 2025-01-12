@@ -16,7 +16,7 @@ class AddGameFormController {
             exit;
         }
         $platformModel = new Platform($this->pdo);
-        $platforms = $platformModel->getAll();
+        $platforms = Platform::getAll($this->pdo);
         require 'views/games/AddGameForm.php';
     }
 
