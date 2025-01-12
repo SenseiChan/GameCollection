@@ -22,6 +22,9 @@
         <button name="addGameForm" onclick="window.location.href='AddGameForm'">Ajouter un nouveau jeu</button>
         <section class="results">
             <h2>Résultats de la recherche</h2>
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <p style="color: green;">Le jeu a été ajouté à votre bibliothèque avec succès !</p>
+            <?php endif; ?>
             <div class="games-grid">
                 <?php if (!empty($games)) {
                     foreach ($games as $game): ?>
@@ -30,8 +33,8 @@
                             <div class="game-info">
                                 <h1><?php echo htmlspecialchars($game['Name_game']); ?></h1>
                                 <p><?php echo htmlspecialchars($game['platforms'] ?? 'Aucune plateforme'); ?></p>
-                                <form method="POST" action="/library/add">
-                                    <input type="hidden" name="game_id" value="<?php echo $game['Id_game']; ?>">
+                                <form method="POST" action="/addGame/addToLibrary">
+                                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['Id_game']); ?>">
                                     <button type="submit">Ajouter à la bibliothèque</button>
                                 </form>
                             </div>

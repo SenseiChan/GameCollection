@@ -23,6 +23,27 @@ class AddGameController {
 
         require 'views/games/AddGame.php';
     }
-}
 
+    public function addToLibrary() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupérer l'ID de l'utilisateur et du jeu
+            $userId = $_SESSION['user_id'] ?? null;
+            $gameId = $_POST['game_id'] ?? null;
+
+            if ($userId && $gameId) {
+                try {
+                    Library::addGame($this->pdo, $userId, $gameId, 0);
+
+                    // Rediriger avec un message de succès
+                    header('Location: /addGame?success=1');
+                    exit;
+                } catch (PDOException $e) {
+                    echo "Erreur lors de l'ajout à la bibliothèque : " . htmlspecialchars($e->getMessage());
+                }
+            } else {
+                echo "Erreur : données utilisateur ou jeu manquantes.";
+            }
+        }
+    }
+}
 ?>
