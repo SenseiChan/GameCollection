@@ -19,8 +19,8 @@
             } ?></h2>
         <div class="game-collection">
             <div class="game-specification">
-                <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
-                <p><?php echo htmlspecialchars($game['Desc_Game']); ?></p>
+                <img src="<?php echo htmlspecialchars($game['Url_picture']); ?>" alt="Image du jeu">
+                <p><?php echo htmlspecialchars($game['Desc_game']); ?></p>
                 <p>Temps passé : <?php echo htmlspecialchars($game['Time_played']); ?></p>
                 <h3>Ajouter du temps passé sur le jeu</h3>
                 <label> Temps passé sur le jeu :
