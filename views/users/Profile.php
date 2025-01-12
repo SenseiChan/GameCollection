@@ -15,7 +15,7 @@
 <main>
     <h1>Mon Profil</h1>
     <?php if (isset($id) && $id): ?>
-        <form action="" method="POST">
+        <form action="/profile/handleUpdateProfile" method="POST">
             <label> Prénom :
                 <input type="text" name="prenom" value="<?php echo htmlspecialchars($Prenom); ?>">
             </label>
@@ -32,10 +32,10 @@
                 <input type="password" name="password">
             </label>
             <br>
-            <input type="submit" name="submit" value="Mettre à jour">
+            <input type="submit" name="submit" value="Modifier">
         </form>
-        <form action="" method="POST">
-            <button type="submit" name="delete_account">Supprimer le compte</button>
+        <form action="/profile/handleDeleteAccount" method="POST">
+            <button type="submit" name="delete_account">Supprimer mon compte</button>
         </form>
         <form action="/profile/handleLogout" method="POST">
             <button type="submit" name="logout">Se déconnecter</button>
