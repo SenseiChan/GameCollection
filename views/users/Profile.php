@@ -37,7 +37,7 @@
         <form action="" method="POST">
             <button type="submit" name="delete_account">Supprimer le compte</button>
         </form>
-        <form action="" method="POST">
+        <form action="/profile/handleLogout" method="POST">
             <button type="submit" name="logout">Se déconnecter</button>
         </form>
     <?php else: ?>

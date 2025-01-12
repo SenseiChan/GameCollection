@@ -107,12 +107,13 @@ class ProfileController {
 
     // Gérer la déconnexion de l'utilisateur
     public function handleLogout() {
-        if (isset($_POST['logout'])) {
-            session_destroy();
-            header("Location: Login.php");
-            exit;
-        }
-    }
+        // Détruire la session pour déconnecter l'utilisateur
+        session_destroy();
+    
+        // Rediriger l'utilisateur vers la page de connexion
+        header("Location: /login");
+        exit;
+    }    
 
     // Récupérer les informations utilisateur
     public function getUserInfo() {
