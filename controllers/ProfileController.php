@@ -47,16 +47,10 @@ class ProfileController {
     }
 
     // Gérer la mise à jour du profil utilisateur
-    public function handleUpdateProfile($data) {
-        if ($this->userId) {
-            // Déboguer les données reçues
+    public function handleUpdateProfile($data) {  
+        if ($this->userId && isset($data['submit'])) {
             var_dump($data);
             exit;
-        } else {
-            echo "<p>Erreur : Utilisateur non connecté.</p>";
-        }
-        
-        if ($this->userId && isset($data['submit'])) {
             $newPrenom = trim($data['prenom']);
             $newNom = trim($data['nom']);
             $newEmail = trim($data['email']);
