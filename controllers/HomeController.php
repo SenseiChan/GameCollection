@@ -2,6 +2,7 @@
 
 require_once 'models/User.php';
 require_once 'models/Game.php';
+require_once 'models/Library.php';
 
 class HomeController {
     private $pdo;
