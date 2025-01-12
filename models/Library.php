@@ -1,7 +1,7 @@
 <?php
 require_once 'config/Database.php';
 
-class Game {
+class Library {
     private $id_user;
     private $id_game;
     private $time_played;
