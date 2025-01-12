@@ -37,7 +37,7 @@
                     <input type="text" name="description">
                 </label>
                 <br>
-                <label>Url de jsp :
+                <label>Url de la cover :
                     <input type="text" name="URL1">
                 </label>
                 <br>
