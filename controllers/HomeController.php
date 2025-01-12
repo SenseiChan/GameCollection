@@ -14,7 +14,7 @@ class HomeController {
         $this->pdo = $pdo;
         $this->userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         $this->userFirstName = $this->getUserFirstName();
-        $this->games = $this->getGamesByUser();
+        $this->games = $this->getUserGames();
     }
 
     private function getUserFirstName() {
@@ -25,9 +25,9 @@ class HomeController {
         return '';
     }
 
-    private function getGamesByUser() {
+    private function getUserGames() {
         if ($this->userId) {
-            return Library::getByUser($this->pdo, $this->userId);
+            return Library::getGamesByUser($this->pdo, $this->userId);
         }
         return [];
     }
