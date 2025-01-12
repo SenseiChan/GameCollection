@@ -14,23 +14,26 @@
 <?php include 'views/tools/header.php'; ?>
 <main>
     <section id="Modifier-Game">
-        <h2><?php echo htmlspecialchars($game['Name_game']); ?></h2>
+        <h2><?php if (!empty($game)) {
+                echo htmlspecialchars($game['Name_game']);
+            } ?></h2>
         <div class="game-collection">
             <div class="game-specification">
                 <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
-                <p><?php echo htmlspecialchars($game['Desc_Game']); ?> h</p>
-                <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
-                <h3>Ajouter du temps passée sur le jeu</h3>
+                <p><?php echo htmlspecialchars($game['Desc_Game']); ?></p>
+                <p>Temps passé : <?php echo htmlspecialchars($game['Time_played']); ?></p>
+                <h3>Ajouter du temps passé sur le jeu</h3>
                 <label> Temps passé sur le jeu :
-                    <input type="Float" name="Temps" value="<?php echo htmlspecialchars($Temps); ?>">
+                    <input type="text" name="Temps" value="<?php echo htmlspecialchars($game['Time_played']); ?>">
                 </label>
-                <form method="POST" action="/library/add">
+                <form method="POST" action="/library/handleupdate">
+
                             <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
-                            <button type="submit">Modifier le jeu</button>
+                            <button type="submit">Ajouter</button>
                 </form>
-                <form method="POST" action="/library/add">
+                <form method="POST" action="/library/handledelete">
                             <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
-                            <button type="submit">Supprimer le jeu</button>
+                            <button type="submit">Supprimer le jeu de ma bibliothèque</button>
                 </form>
              </div>
         </div>
