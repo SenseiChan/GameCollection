@@ -15,41 +15,36 @@
     <?php include 'views/tools/header.php' ;?>
     <main>
         <h1>Ajout d'un jeu</h1>
-        <?php if (isset($id) && $id): ?>
-            <form action="/profile/handleUpdateProfile" method="POST">
-                <label>Nom du jeu :
-                    <input type="text" name="Nom du jeu">
-                </label>
-                <br>
-                <label>Éditeur du jeu :
-                    <input type="text" name="editeur">
-                </label>
-                <br>
-                <label>Sortie du jeu :
-                    <input type="date" name="date de sortie">
-                </label>
-                <br>
-                <label>a faire :
-                    <input type="text" name="Nom du jeu">
-                </label>
-                <br>
-                <label>Description :
-                    <input type="text" name="description">
-                </label>
-                <br>
-                <label>Url de la cover :
-                    <input type="text" name="URL1">
-                </label>
-                <br>
-                <label>Url du site :
-                    <input type="text" name="URL site">
-                </label>
-                <br>
-                <input type="submit" name="submit" value="Ajouter">
-        <?php else: ?>
-            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder au formulaire d'ajout d'un jeu.</p>
-            <button name="login" onclick="window.location.href='Login'">Se connecter</button>
-        <?php endif; ?>
+        <form action="/profile/handleUpdateProfile" method="POST">
+            <label>Nom du jeu :
+                <input type="text" name="Nom du jeu">
+            </label>
+            <br>
+            <label>Éditeur du jeu :
+                <input type="text" name="editeur">
+            </label>
+            <br>
+            <label>Sortie du jeu :
+                <input type="date" name="date de sortie">
+            </label>
+            <br>
+            <label>a faire :
+                <input type="text" name="Nom du jeu">
+            </label>
+            <br>
+            <label>Description :
+                <input type="text" name="description">
+            </label>
+            <br>
+            <label>Url de la cover :
+                <input type="text" name="URL1">
+            </label>
+            <br>
+            <label>Url du site :
+                <input type="text" name="URL site">
+            </label>
+            <br>
+            <input type="submit" name="submit" value="Ajouter">
     </main>
     <?php include 'views/tools/footer.php'; ?>
 </body>
