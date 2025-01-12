@@ -28,7 +28,7 @@
                     <div class="game-card-add" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
                         <div class="gradient-overlay">
                             <div class="game-info">
-                                <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
+                                <h1><?php echo htmlspecialchars($game['Name_game']); ?></h1>
                                 <p><?php echo htmlspecialchars($game['platforms'] ?? 'Aucune plateforme'); ?></p>
                                 <form method="POST" action="/library/add">
                                     <input type="hidden" name="game_id" value="<?php echo $game['Id_game']; ?>">
