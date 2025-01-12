@@ -17,7 +17,7 @@ class ProfileController {
     private function loadUserData() {
         if ($this->userId) {
             try {
-                $sql = "SELECT FirstName_user, Email_user, Password_user, LastName_user FROM users WHERE id_user = :id";
+                $sql = "SELECT FirstName_user, Email_user, Password_user, LastName_user FROM User WHERE id_user = :id";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
                 $stmt->execute();
@@ -43,7 +43,7 @@ class ProfileController {
             $newPassword = !empty($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : null;
 
             try {
-                $updateSql = "UPDATE users SET Email_user = :email, FirstName_user = :prenom, LastName_user = :nom";
+                $updateSql = "UPDATE User SET Email_user = :email, FirstName_user = :prenom, LastName_user = :nom";
 
                 if ($newPassword) {
                     $updateSql .= ", Password_user = :password";
@@ -79,7 +79,7 @@ class ProfileController {
     public function handleDeleteAccount() {
         if ($this->userId && isset($_POST['delete_account'])) {
             try {
-                $deleteSql = "DELETE FROM users WHERE id_user = :id";
+                $deleteSql = "DELETE FROM User WHERE id_user = :id";
                 $deleteStmt = $this->pdo->prepare($deleteSql);
                 $deleteStmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
                 $deleteStmt->execute();
