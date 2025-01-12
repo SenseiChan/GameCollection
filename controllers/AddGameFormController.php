@@ -2,6 +2,7 @@
 require_once 'models/Game.php';
 require_once 'models/Library.php';
 require_once 'models/Platform.php';
+require_once 'models/Available.php';
 
 class AddGameFormController {
     private $pdo;
