@@ -42,6 +42,5 @@ if (!$isLoggedIn && $controllerName !== 'SignupController' && $controllerName !=
         echo "L'action $actionName n'a pas été trouvée dans le contrôleur $controllerName.";
     }
 } else {
-    http_response_code(404);
-    echo "Le contrôleur $controllerName est introuvable.";
+    header('Location: /Library');
 }
