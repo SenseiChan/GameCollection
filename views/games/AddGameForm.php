@@ -30,8 +30,8 @@
             <br>
             <?php foreach ($platforms as $platform): ?>
                 <label>
-                    <input type="checkbox" name="platforms[]" value="<?php echo htmlspecialchars($platform['id']); ?>">
-                    <?php echo htmlspecialchars($platform['name']); ?>
+                    <input type="checkbox" name="platforms[]" value="<?php echo htmlspecialchars($platform['Id_platform']); ?>">
+                    <?php echo htmlspecialchars($platform['Name_platform']); ?>
                 </label>
                 <br>
             <?php endforeach; ?>
