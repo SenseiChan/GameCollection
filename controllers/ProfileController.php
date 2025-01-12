@@ -1,132 +1,108 @@
 <?php
 
+require_once 'models/User.php';
+
 class ProfileController {
     private $pdo;
     private $userId;
-    private $prenom;
-    private $nom;
+    private $firstName;
+    private $lastName;
     private $email;
 
-    public function __construct($pdo, $userId) {
+    public function __construct($pdo) {
         $this->pdo = $pdo;
-        $this->userId = $userId;
+        $this->userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         $this->loadUserData();
     }
 
     public function display() {
-        // Préparez les données utilisateur
-        $id = $this->userId;
-        $Prenom = $this->prenom;
-        $Nom = $this->nom;
-        $Email = $this->email;
-    
-        // Chargez la vue avec les variables nécessaires
-        require_once __DIR__ . '/../views/users/Profile.php';
-    }
-     
+        $userId = $this->userId;
+        $firstName = $this->firstName;
+        $lastName = $this->lastName;
+        $email = $this->email;
 
-    // Charger les données de l'utilisateur à partir de la base de données
+        require 'views/users/Profile.php';
+    }
+
+    // Load user data from the database
     private function loadUserData() {
         if ($this->userId) {
-            try {
-                $sql = "SELECT FirstName_user, Email_user, Password_user, LastName_user FROM User WHERE id_user = :id";
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
-                $stmt->execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ($result) {
-                    $this->prenom = $result['FirstName_user'];
-                    $this->email = $result['Email_user'];
-                    $this->nom = $result['LastName_user'];
-                }
-            } catch (PDOException $e) {
-                die("Erreur lors de la requête : " . $e->getMessage());
+            $user = User::getById($this->pdo, $this->userId);
+            if ($user) {
+                $this->firstName = $user['FirstName_user'];
+                $this->lastName = $user['LastName_user'];
+                $this->email = $user['Email_user'];
             }
         }
     }
 
-    // Gérer la mise à jour du profil utilisateur
-    public function handleUpdateProfile($data) {  
-        if ($this->userId && isset($data['submit'])) {
-            $newPrenom = trim($data['prenom']);
-            $newNom = trim($data['nom']);
+    // Handle user profile update
+    public function handleUpdateProfile($data) {
+        try {
+            $newFirstName = trim($data['firstName']);
+            $newLastName = trim($data['lastName']);
             $newEmail = trim($data['email']);
-            $newPassword = !empty($data['password']) ? password_hash(trim($data['password']), PASSWORD_DEFAULT) : null;
-    
+            $newPassword = trim($data['password']);
+            $confirmPassword = trim($data['confirmPassword']);
+        } catch (Exception $e) {
+            echo "<p>Error updating profile: " . $e->getMessage() . "</p>";
+        }
+
+        if ($newPassword == $confirmPassword) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             try {
-                $updateSql = "UPDATE User SET Email_user = :email, FirstName_user = :prenom, LastName_user = :nom";
-    
-                if ($newPassword) {
-                    $updateSql .= ", Password_user = :password";
-                }
-    
-                $updateSql .= " WHERE id_user = :id";
-    
-                $updateStmt = $this->pdo->prepare($updateSql);
-                $updateStmt->bindParam(':email', $newEmail, PDO::PARAM_STR);
-                $updateStmt->bindParam(':prenom', $newPrenom, PDO::PARAM_STR);
-                $updateStmt->bindParam(':nom', $newNom, PDO::PARAM_STR);
-                $updateStmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
-    
-                if ($newPassword) {
-                    $updateStmt->bindParam(':password', $newPassword, PDO::PARAM_STR);
-                }
-    
-                $updateStmt->execute();
-    
-                // Mettre à jour les variables d'instance
-                $this->prenom = $newPrenom;
-                $this->nom = $newNom;
+                User::update($this->pdo, $this->userId, $newFirstName, $newLastName, $newEmail, $newPassword);
+
+                // Update instance variables
+                $this->firstName = $newFirstName;
+                $this->lastName = $newLastName;
                 $this->email = $newEmail;
-    
-                // Rediriger vers la page de profil avec un message de succès
-                header('Location: /profile?success=1');
+
+                // Redirect to profile page with success message
+                header('Location: /profile');
                 exit;
             } catch (PDOException $e) {
-                // Afficher l'erreur
-                echo "<p>Erreur lors de la mise à jour : " . $e->getMessage() . "</p>";
+                // Display error
+                echo "<p>Error updating profile: " . $e->getMessage() . "</p>";
             }
-        } else {
-            echo "<p>Erreur : Données soumises incorrectes ou utilisateur non connecté.</p>";
         }
-    }    
+        else {
+            echo "Passwords do not match";
+        }
+    }
 
-    // Gérer la suppression du compte utilisateur
+    // Handle account deletion
     public function handleDeleteAccount() {
         if ($this->userId && isset($_POST['delete_account'])) {
             try {
-                $deleteSql = "DELETE FROM User WHERE id_user = :id";
-                $deleteStmt = $this->pdo->prepare($deleteSql);
-                $deleteStmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
-                $deleteStmt->execute();
+                User::delete($this->pdo, $this->userId);
 
                 session_destroy();
                 header("Location: signup.php");
                 exit;
             } catch (PDOException $e) {
-                return "<p>Erreur lors de la suppression : " . $e->getMessage() . "</p>";
+                echo "<p>Error deleting account: " . $e->getMessage() . "</p>";
             }
         }
     }
 
-    // Gérer la déconnexion de l'utilisateur
+    // Handle user logout
     public function handleLogout() {
-        // Détruire la session pour déconnecter l'utilisateur
+        // Destroy session to log out user
         session_destroy();
-    
-        // Rediriger l'utilisateur vers la page de connexion
+
+        // Redirect user to login page
         header("Location: /login");
         exit;
-    }    
-
-    // Récupérer les informations utilisateur
-    public function getUserInfo() {
-        return [
-            'prenom' => $this->prenom,
-            'nom' => $this->nom,
-            'email' => $this->email
-        ];
     }
+
+    // Get user information
+//    public function getUserInfo() {
+//        return [
+//            'FirstName_user' => $this->firstName,
+//            'LastName_user' => $this->lastName,
+//            'Email_user' => $this->email
+//        ];
+//    }
 }
 ?>

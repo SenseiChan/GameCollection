@@ -23,6 +23,13 @@ class User {
         $stmt->execute([$firstName, $lastName, $email, $hashedPassword]);
     }
 
+    // Méthode pour mettre à jour un utilisateur
+    public static function update($pdo, $id_user, $firstName, $lastName, $email, $password) {
+        $stmt = $pdo->prepare("UPDATE User SET FirstName_user = ?, LastName_user = ?, Email_user = ?, Password_user = ? WHERE Id_user = ?");
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->execute([$firstName, $lastName, $email, $hashedPassword, $id_user]);
+    }
+
     // Méthode pour récupérer un utilisateur par ID
     public static function getById($pdo, $id_user) {
         $stmt = $pdo->prepare("SELECT * FROM User WHERE Id_user = ?");
@@ -46,5 +53,11 @@ class User {
         $stmt = $pdo->prepare("SELECT FirstName_user FROM User WHERE Id_user = ?");
         $stmt->execute([$userId]);
         return $stmt->fetchColumn();
+    }
+
+    public static function delete($pdo, mixed $userId)
+    {
+        $stmt = $pdo->prepare("DELETE FROM User WHERE Id_user = ?");
+        $stmt->execute([$userId]);
     }
 }

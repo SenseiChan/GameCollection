@@ -24,12 +24,12 @@
             <h2>Résultats de la recherche</h2>
             <div class="games-grid">
                 <?php foreach ($games as $game): ?>
-                <div class="game-card" style="background-image: url('<?php echo $game['image_url']; ?>');">
+                <div class="game-card" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
                     <div class="game-info">
-                        <h3><?php echo htmlspecialchars($game['name']); ?></h3>
-                        <p><?php echo htmlspecialchars($game['platform']); ?></p>
+                        <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
+                        <p><?php echo htmlspecialchars($game['Publisher_game']); ?></p>
                         <form method="POST" action="/library/add">
-                            <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
+                            <input type="hidden" name="game_id" value="<?php echo $game['Id_game']; ?>">
                             <button type="submit">Ajouter à la bibliothèque</button>
                         </form>
                     </div>
