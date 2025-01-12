@@ -21,7 +21,7 @@ class ProfileController {
         $lastName = $this->lastName;
         $email = $this->email;
 
-        require_once '/views/users/Profile.php';
+        require 'views/users/Profile.php';
     }
 
     // Load user data from the database
