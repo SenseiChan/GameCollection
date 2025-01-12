@@ -42,7 +42,10 @@ $pdo = Database::getConnection();
 $controllerFile = 'controllers/' . $controllerName . '.php';
 
 // Vérifier si le contrôleur existe
-if (file_exists($controllerFile)) {
+if (!$isLoggedIn) {
+    header('Location: /login');
+}
+else if (file_exists($controllerFile)) {
     require_once $controllerFile;
 
     // Vérification spéciale pour ProfileController, qui attend un userId
