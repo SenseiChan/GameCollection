@@ -31,7 +31,7 @@
                             <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
                             <button type="submit">Ajouter</button>
                 </form>
-                <form method="POST" action="/library/handledelete">
+                <form method="POST" action="/library/deleteGame">
                             <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
                             <button type="submit">Supprimer le jeu de ma bibliothèque</button>
                 </form>

@@ -29,7 +29,7 @@ CREATE TABLE Game(
 CREATE TABLE Library(
     Id_user INT,
     Id_game INT,
-    Time_Played DATE NOT NULL,
+    Time_Played INT NOT NULL,
     PRIMARY KEY (Id_user,Id_game),
     FOREIGN KEY (Id_user) REFERENCES User(id_user),
     FOREIGN KEY (Id_game) REFERENCES Game(id_game)
