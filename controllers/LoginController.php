@@ -35,7 +35,7 @@ class LoginController {
                 $_SESSION['user_name'] = $user['LastName_user'];
                 $_SESSION['user_first_name'] = $user['FirstName_user'];
 
-                header('Location: index.php');
+                header('Location: /home');
                 exit;
             } else {
                 echo "Email ou mot de passe incorrect.";
