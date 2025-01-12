@@ -24,15 +24,13 @@
                 <p>Temps passé : <?php echo htmlspecialchars($game['Time_played'] ?? 0); ?></p>
                 <h3>Ajouter du temps passé sur le jeu</h3>
                 <form method="POST" action="/library/handleupdate">
-                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['Id_game'] ?? ''); ?>">
-                    <label>Temps passé sur le jeu :
-                        <input type="text" name="time_played" value="<?php echo htmlspecialchars($game['Time_played'] ?? 0); ?>">
-                    </label>
-                    <button type="submit">Ajouter</button>
+
+                            <input type="hidden" name="game_id" value="<?php echo $gameId; ?>">
+                            <button type="submit">Ajouter</button>
                 </form>
-                <form method="POST" action="/library/deleteGame">
-                    <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($game['Id_game'] ?? ''); ?>">
-                    <button type="submit">Supprimer le jeu de ma bibliothèque</button>
+                <form method="POST" action="/library/handledelete">
+                            <input type="hidden" name="game_id" value="<?php echo $gameId; ?>">
+                            <button type="submit">Supprimer le jeu de ma bibliothèque</button>
                 </form>
             </div>
         </div>
