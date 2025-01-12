@@ -16,9 +16,22 @@ class Library {
 
     // Récupérer tous les jeux disponibles
     public function getAllGames() {
-        $query = "SELECT * FROM Game";
+        $query = "
+            SELECT 
+                Game.Id_game,
+                Game.Name_game,
+                Game.Url_picture,
+                Game.Desc_game,
+                Game.Date_game,
+                Game.Publisher_game,
+                GROUP_CONCAT(Platform.Name_platform SEPARATOR ', ') AS platforms
+            FROM Game
+            LEFT JOIN Available ON Game.Id_game = Available.Id_game
+            LEFT JOIN Platform ON Available.Id_platform = Platform.Id_platform
+            GROUP BY Game.Id_game, Game.Name_game, Game.Url_picture, Game.Desc_game, Game.Date_game, Game.Publisher_game
+        ";
         $stmt = $this->pdo->query($query);
-
+    
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
