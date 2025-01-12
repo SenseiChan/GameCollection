@@ -32,19 +32,7 @@ if (!$isLoggedIn && $controllerName !== 'SignupController' && $controllerName !=
     exit;
 } elseif (file_exists($controllerFile)) {
     require_once $controllerFile;
-
-    // Gestion spécifique pour le ProfileController
-    if ($controllerName === 'ProfileController') {
-        if ($isLoggedIn) {
-            $userId = $_SESSION['user_id'];
-            $controller = new $controllerName($pdo, $userId);
-        } else {
-            header('Location: /login'); // Redirection vers la page de connexion si non connecté
-            exit;
-        }
-    } else {
-        $controller = new $controllerName($pdo); // Instanciation du contrôleur
-    }
+    $controller = new $controllerName($pdo); // Instanciation du contrôleur
 
     // Exécution de l'action si elle existe
     if (method_exists($controller, $actionName)) {

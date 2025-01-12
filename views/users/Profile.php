@@ -15,18 +15,17 @@
     <?php include 'views/tools/header.php' ;?>
     <main>
         <h1>Mon Profil</h1>
-        <?php if (isset($id) && $id): ?>
             <form action="/profile/handleUpdateProfile" method="POST">
                 <label> Prénom :
-                    <input type="text" name="prenom" value="<?php echo htmlspecialchars($Prenom); ?>">
+                    <input type="text" name="firstName" value="<?php echo !empty($firstName) ? htmlspecialchars($firstName) : ''; ?>">
                 </label>
                 <br>
                 <label> Nom :
-                    <input type="text" name="nom" value="<?php echo htmlspecialchars($Nom); ?>">
+                    <input type="text" name="lastName" value="<?php echo !empty($lastName) ? htmlspecialchars($lastName) : ''; ?>">
                 </label>
                 <br>
                 <label> Email :
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($Email); ?>">
+                    <input type="email" name="email" value="<?php echo !empty($email) ? htmlspecialchars($email) : ''; ?>">
                 </label>
                 <br>
                 <label> Mot de passe :
@@ -36,17 +35,11 @@
                 <input type="submit" name="submit" value="Modifier">
             </form>
             <form action="/profile/handleDeleteAccount" method="POST">
-                <input type="submit" name="delete_account">Supprimer mon compte
+                <input type="submit" name="delete_account" value="Supprimer mon compte">
             </form>
             <form action="/profile/handleLogout" method="POST">
-                <input type="submit" name="logout">Se déconnecter
+                <input type="submit" name="delete_account" value="Se déconnecter">
             </form>
-        <?php else: ?>
-            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à votre profil.</p>
-            <form action="connection.php" method="GET">
-                <button type="submit">Se connecter</button>
-            </form>
-        <?php endif; ?>
     </main>
     <?php include 'views/tools/footer.php'; ?>
 </body>
