@@ -17,7 +17,7 @@ $params = explode('/', $url);
 // Détermine le contrôleur et l'action à partir de l'URL
 // Exemple : /login -> Controller = LoginController, Action = index
 //           /login/show -> Controller = LoginController, Action = show
-$controllerName = !empty($params[0]) ? ucfirst($params[0]) . 'Controller' : null;
+$controllerName = !empty($params[0]) ? ucfirst($params[0]) . 'Controller' : 'login';
 $actionName = !empty($params[1]) ? $params[1] : 'display';
 
 // Instancier la connexion à la base de données
