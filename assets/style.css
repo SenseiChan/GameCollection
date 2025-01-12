@@ -219,6 +219,15 @@ tbody td:nth-child(3) {
     padding: 10px;
 }
 
+#add-game-main {
+    width: 80%;
+    margin: auto;
+}
+
+#add-game-main input[type="text"]{
+    width: 50%;
+}
+
 /* Fonts */
 .barlow-thin {
     font-family: "Barlow", sans-serif;
