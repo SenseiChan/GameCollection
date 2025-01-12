@@ -32,6 +32,10 @@
                     <input type="password" name="password">
                 </label>
                 <br>
+                <label> Confirmation du mot de passe :
+                    <input type="password" name="confirmPassword">
+                </label>
+                <br>
                 <input type="submit" name="submit" value="Modifier">
             </form>
             <form action="/profile/handleDeleteAccount" method="POST">
