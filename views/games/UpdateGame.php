@@ -28,11 +28,16 @@
                 </label>
                 <form method="POST" action="/library/handleupdate">
 
-                            <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
+                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
                             <button type="submit">Ajouter</button>
                 </form>
+<<<<<<< HEAD
                 <form method="POST" action="/library/deleteGame">
                             <input type="hidden" name="game_id" value="<?php echo $game['id']; ?>">
+=======
+                <form method="POST" action="/library/handledelete">
+                            <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+>>>>>>> f4919732e70d0ed425df32b4abc35153039dfb8d
                             <button type="submit">Supprimer le jeu de ma bibliothèque</button>
                 </form>
              </div>
