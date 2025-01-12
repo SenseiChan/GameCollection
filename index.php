@@ -28,8 +28,6 @@ $pdo = Database::getConnection(); // Connexion à la base de données
 $controllerFile = 'controllers/' . $controllerName . '.php';
 
 if (!$isLoggedIn && $controllerName !== 'SignupController' && $controllerName !== 'LoginController') {
-//    require_once 'controllers/LoginController.php';
-//    (new LoginController($pdo))->display(); // Redirection vers la page de connexion si non connecté
     header('Location: /login');
     exit;
 } elseif (file_exists($controllerFile)) {

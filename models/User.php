@@ -40,4 +40,11 @@ class User {
         }
         return null;
     }
+
+    public static function getFirstName($pdo, mixed $userId)
+    {
+        $stmt = $pdo->prepare("SELECT FirstName_user FROM User WHERE Id_user = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetchColumn();
+    }
 }

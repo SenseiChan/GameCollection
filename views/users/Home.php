@@ -16,7 +16,7 @@
         <section>
             <div id="home-page-welcome">
                 <h1>
-                    SALUT <?php echo !empty($prenom) ? $prenom : ''; ?> !<br>
+                    SALUT <?php echo !empty($userFirstName) ? $userFirstName : ''; ?> !<br>
                     PRÊT À AJOUTER DES <br>
                     JEUX À TA COLLECTION ?
                 </h1>
@@ -25,13 +25,13 @@
         <section id="home-page-games">
             <h2>Mes jeux</h2>
             <div class="game-collection">
-                <?php if (!empty($jeux)) : ?>
-                    <?php foreach ($jeux as $jeu) : ?>
+                <?php if (!empty($games)) : ?>
+                    <?php foreach ($games as $game) : ?>
                         <div class="game-card">
-                            <img src="<?php echo htmlspecialchars($jeu['image_url']); ?>" alt="Image du jeu">
-                            <h3><?php echo htmlspecialchars($jeu['title']); ?></h3>
-                            <p><?php echo htmlspecialchars($jeu['platform']); ?></p>
-                            <p><?php echo htmlspecialchars($jeu['playtime']); ?> h</p>
+                            <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
+                            <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
+                            <p><?php echo htmlspecialchars($game['platforms']); ?></p>
+                            <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
