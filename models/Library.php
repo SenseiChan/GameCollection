@@ -37,7 +37,31 @@ class Game {
         $stmt->execute([$id_user, $id_game]);
     }
 
-    // Get the leaderboard of time played
+    // Get the leaderboard of time played (LIMIT 20)
+    public static function getLeaderbBoard($pdo) {
+        $stmt = $pdo->prepare("
+    SELECT 
+        CONCAT(User.FirstName_user, ' ', User.LastName_user) AS user, 
+        SUM(Library.Time_played) AS total_time_played,
+        (SELECT Game.Name_game 
+         FROM Library AS L2 
+         INNER JOIN Game ON L2.Id_game = Game.Id_game 
+         WHERE L2.Id_user = Library.Id_user 
+         ORDER BY L2.Time_played DESC 
+         LIMIT 1) AS most_played_game
+    FROM 
+        Library 
+    INNER JOIN 
+        User ON Library.Id_user = User.Id_user 
+    GROUP BY 
+        Library.Id_user 
+    ORDER BY 
+        total_time_played DESC
+    LIMIT 20
+");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
 
