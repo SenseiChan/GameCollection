@@ -48,9 +48,7 @@
                 <input type="submit" name="submit" value="Ajouter">
         <?php else: ?>
             <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder au formulaire d'ajout d'un jeu.</p>
-            <form action="connection.php" method="GET">
-                <button type="submit">Se connecter</button>
-            </form>
+            <button name="login" onclick="window.location.href='Login'">Se connecter</button>
         <?php endif; ?>
     </main>
     <?php include 'views/tools/footer.php'; ?>
