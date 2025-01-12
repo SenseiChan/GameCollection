@@ -27,7 +27,7 @@
                 <div class="game-card" style="background-image: url('<?php echo $game['Url_picture']; ?>');">
                     <div class="game-info">
                         <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
-                        <p><?php echo htmlspecialchars($game['Publisher_game']); ?></p>
+                        <p><?php echo htmlspecialchars($game['platforms'] ?? 'Aucune plateforme'); ?></p>
                         <form method="POST" action="/library/add">
                             <input type="hidden" name="game_id" value="<?php echo $game['Id_game']; ?>">
                             <button type="submit">Ajouter à la bibliothèque</button>
