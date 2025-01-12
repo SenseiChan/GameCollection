@@ -27,12 +27,13 @@
         <div class="games-grid">
             <?php if (!empty($games)) : ?>
                 <?php foreach ($games as $game) : ?>
-                    <div class="game-card" style="background-image: url('<?php echo $game['url_picture']; ?>');">
+                    <div class="game-card" 
+                        style="background-image: url('<?php echo htmlspecialchars($game['Url_picture']); ?>');" 
+                        onclick="window.location.href='/updateGame?game_id=<?php echo htmlspecialchars($game['Id_game']); ?>'">
                         <div class="gradient-overlay">
                             <div class="game-info">
-<!--                                <img src="--><?php //echo htmlspecialchars($game['url_picture']); ?><!--" alt="Image du jeu">-->
-                                <h1><?php echo htmlspecialchars($game['Name_game']); ?></h1>
-                                <p><?php echo htmlspecialchars($game['platforms']); ?></p>
+                                <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
+                                <p><?php echo htmlspecialchars($game['platforms'] ?? 'Aucune plateforme'); ?></p>
                                 <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
                             </div>
                         </div>
