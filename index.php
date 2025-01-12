@@ -28,8 +28,20 @@ $controllerFile = 'controllers/' . $controllerName . '.php';
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
 
-    // Instancier le contrôleur
-    $controller = new $controllerName($pdo);
+    // Vérification spéciale pour ProfileController, qui attend un userId
+    if ($controllerName === 'ProfileController') {
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            $controller = new $controllerName($pdo, $userId);
+        } else {
+            // Redirigez vers la page de connexion si l'utilisateur n'est pas connecté
+            header('Location: /login');
+            exit;
+        }
+    } else {
+        // Instancier les autres contrôleurs avec seulement le $pdo
+        $controller = new $controllerName($pdo);
+    }
 
     // Vérifier si l'action (méthode) existe dans le contrôleur
     if (method_exists($controller, $actionName)) {
