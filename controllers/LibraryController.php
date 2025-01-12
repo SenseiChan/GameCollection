@@ -4,7 +4,7 @@ require_once 'models/User.php';
 require_once 'models/Game.php';
 require_once 'models/Library.php';
 
-class HomeController {
+class LibraryController {
     private $pdo;
     private $userId;
     private $userFirstName;
@@ -20,7 +20,7 @@ class HomeController {
     public function display() {
         $userFirstName = $this->userFirstName;
         $games = $this->games;
-        require 'views/users/Home.php';
+        require 'views/users/Library.php';
     }
 }
 ?>

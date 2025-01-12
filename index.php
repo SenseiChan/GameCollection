@@ -17,7 +17,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
 // Déterminer le contrôleur et l'action
 if (empty($url)) {
-    $controllerName = $isLoggedIn ? 'HomeController' : 'LoginController';
+    $controllerName = $isLoggedIn ? 'LibraryController' : 'LoginController';
     $actionName = 'display';
 } else {
     $controllerName = ucfirst($params[0]) . 'Controller';

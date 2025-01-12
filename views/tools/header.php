@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <img src="assets/images/logo.svg" alt="Logo" onclick="window.location.href='Home'">
+        <img src="assets/images/logo.svg" alt="Logo" onclick="window.location.href='Library'">
 
 
         <div id="nav-links">
