@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php include 'views/tools/header.php' ;?>
-    <main>
+    <main id="add-game-main">
         <h1>Ajouter un jeu à sa bibliothèque</h1>
         <form method="GET" action="/addGame">
             <input type="text" name="search" placeholder="Rechercher un jeu" />
