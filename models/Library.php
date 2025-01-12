@@ -5,11 +5,13 @@ class Library {
     private $id_user;
     private $id_game;
     private $time_played;
+    private $pdo;
 
     public function __construct($id_user = null, $id_game = null, $time_played = null) {
         $this->id_user = $id_user;
         $this->id_game = $id_game;
         $this->time_played = $time_played;
+        $this->pdo = $pdo;
     }
 
     // Récupérer tous les jeux disponibles
