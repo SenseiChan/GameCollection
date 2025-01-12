@@ -12,6 +12,23 @@ class Library {
         $this->time_played = $time_played;
     }
 
+    // Récupérer tous les jeux disponibles
+    public function getAllGames() {
+        $query = "SELECT * FROM Game";
+        $stmt = $this->pdo->query($query);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Rechercher des jeux par nom
+    public function searchGames($search) {
+        $query = "SELECT * FROM Game WHERE name LIKE :search";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['search' => "%$search%"]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Add a game to an user
     public static function addGame($pdo, $id_user, $id_game, $time_played) {
         $stmt = $pdo->prepare("INSERT INTO Library (Id_user, Id_game, Time_played) VALUES (?, ?, ?)");
