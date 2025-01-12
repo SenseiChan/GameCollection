@@ -17,6 +17,11 @@ $params = explode('/', $url);
 // Vérifier si l'utilisateur est connecté
 $isLoggedIn = isset($_SESSION['user_id']);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    var_dump($_POST);
+    exit; // Arrêtez l'exécution pour vérifier les données POST
+}
+
 // Détermine le contrôleur et l'action à partir de l'URL
 if (empty($url)) {
     // Si aucune URL n'est spécifiée
