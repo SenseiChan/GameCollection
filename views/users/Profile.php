@@ -14,6 +14,7 @@
 <body>
     <?php include 'views/tools/header.php' ;?>
     <main>
+        <div id="form_profile">
         <h1>Mon Profil</h1>
             <form action="/profile/handleUpdateProfile" method="POST">
                 <label> Prénom :
@@ -44,6 +45,7 @@
             <form action="/profile/handleLogout" method="POST">
                 <input type="submit" name="delete_account" value="Se déconnecter">
             </form>
+        </div>
     </main>
     <?php include 'views/tools/footer.php'; ?>
 </body>

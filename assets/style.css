@@ -47,6 +47,7 @@ button[type="submit"]
     border: 0;
     text-transform: uppercase;
     cursor: pointer;
+    margin: 0.25em;
 }
 
 input[type="email"],
@@ -165,6 +166,10 @@ tbody td:nth-child(2) {
 thead th:nth-child(3),
 tbody td:nth-child(3) {
     width: 37.5%;
+}
+
+#form_profile {
+    margin-left: 10%;
 }
 
 /* Fonts */
