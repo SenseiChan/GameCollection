@@ -19,6 +19,7 @@
             <input type="text" name="search" placeholder="Rechercher un jeu" />
             <button type="submit">Rechercher</button>
         </form>
+        <button name="addGameForm" onclick="window.location.href='AddGameForm'">Ajouter un nouveau jeu</button>
         <section class="results">
             <h2>Résultats de la recherche</h2>
             <div class="games-grid">
