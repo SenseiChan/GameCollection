@@ -49,43 +49,48 @@ class ProfileController {
     // Gérer la mise à jour du profil utilisateur
     public function handleUpdateProfile($data) {
         if ($this->userId && isset($data['submit'])) {
-            $newPrenom = $data['prenom'];
-            $newNom = $data['nom'];
-            $newEmail = $data['email'];
-            $newPassword = !empty($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : null;
-
+            $newPrenom = trim($data['prenom']);
+            $newNom = trim($data['nom']);
+            $newEmail = trim($data['email']);
+            $newPassword = !empty($data['password']) ? password_hash(trim($data['password']), PASSWORD_DEFAULT) : null;
+    
             try {
                 $updateSql = "UPDATE User SET Email_user = :email, FirstName_user = :prenom, LastName_user = :nom";
-
+    
                 if ($newPassword) {
                     $updateSql .= ", Password_user = :password";
                 }
-
+    
                 $updateSql .= " WHERE id_user = :id";
-
+    
                 $updateStmt = $this->pdo->prepare($updateSql);
                 $updateStmt->bindParam(':email', $newEmail, PDO::PARAM_STR);
                 $updateStmt->bindParam(':prenom', $newPrenom, PDO::PARAM_STR);
                 $updateStmt->bindParam(':nom', $newNom, PDO::PARAM_STR);
                 $updateStmt->bindParam(':id', $this->userId, PDO::PARAM_INT);
-
+    
                 if ($newPassword) {
                     $updateStmt->bindParam(':password', $newPassword, PDO::PARAM_STR);
                 }
-
+    
                 $updateStmt->execute();
-
+    
                 // Mettre à jour les variables d'instance
                 $this->prenom = $newPrenom;
                 $this->nom = $newNom;
                 $this->email = $newEmail;
-
-                return "<p>Mise à jour réussie !</p>";
+    
+                // Rediriger vers la page de profil avec un message de succès
+                header('Location: /profile?success=1');
+                exit;
             } catch (PDOException $e) {
-                return "<p>Erreur lors de la mise à jour : " . $e->getMessage() . "</p>";
+                // Afficher l'erreur
+                echo "<p>Erreur lors de la mise à jour : " . $e->getMessage() . "</p>";
             }
+        } else {
+            echo "<p>Erreur : Données soumises incorrectes ou utilisateur non connecté.</p>";
         }
-    }
+    }    
 
     // Gérer la suppression du compte utilisateur
     public function handleDeleteAccount() {
