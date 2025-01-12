@@ -170,6 +170,11 @@ tbody td:nth-child(3) {
 
 #form_profile {
     margin-left: 10%;
+    margin-right: 10%;
+}
+
+#form_profile input {
+    margin-bottom: 10px;
 }
 
 /* Fonts */
