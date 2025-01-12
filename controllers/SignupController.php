@@ -32,7 +32,7 @@ class SignupController {
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $this->pdo->prepare("INSERT INTO User (LastName_user, FistName_user, Email_user, Password_user) VALUES (:name, :first_name, :email, :password)");
+            $stmt = $this->pdo->prepare("INSERT INTO User (LastName_user, FirstName_user, Email_user, Password_user) VALUES (:name, :first_name, :email, :password)");
             $stmt->execute([
                 'name' => $name,
                 'first_name' => $first_name,
