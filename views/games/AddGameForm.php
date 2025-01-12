@@ -15,6 +15,9 @@
     <?php include 'views/tools/header.php' ;?>
     <main>
         <h1>Ajout d'un jeu</h1>
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+            <p style="color: green; font-weight: bold;">Le jeu a été ajouté avec succès !</p>
+        <?php endif; ?>
         <form action="/addGameForm/add" method="POST">
             <label>Nom du jeu
                 <input type="text" name="name" required>
