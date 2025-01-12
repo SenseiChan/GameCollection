@@ -29,7 +29,7 @@
                 <?php foreach ($games as $game) : ?>
                     <div class="game-card" 
                         style="background-image: url('<?php echo $game['Url_picture']; ?>');" 
-                        onclick="window.location.href='/updateGame?game_id=<?php echo htmlspecialchars($game['Id_game']); ?>'">
+                        onclick="window.location.href='/updateGame?game_id=<?php echo $game['Id_game']; ?>'">
                         <div class="gradient-overlay">
                             <div class="game-info">
                                 <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
