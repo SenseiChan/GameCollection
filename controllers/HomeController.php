@@ -24,9 +24,9 @@ class HomeController {
         return '';
     }
 
-    private function getUserGames() {
+    private function getGamesByUser() {
         if ($this->userId) {
-            return Game::getByUser($this->pdo, $this->userId);
+            return Library::getByUser($this->pdo, $this->userId);
         }
         return [];
     }
