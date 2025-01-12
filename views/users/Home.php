@@ -8,38 +8,38 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include 'views/tools/header.php' ;?>
-    <main>
-        <section>
-            <div id="home-page-welcome">
-                <h1>
-                    SALUT <?php echo !empty($userFirstName) ? $userFirstName : ''; ?> !<br>
-                    PRÊT À AJOUTER DES <br>
-                    JEUX À TA COLLECTION ?
-                </h1>
-            </div>
-        </section>
-        <section id="home-page-games">
-            <h2>Mes jeux</h2>
-            <div class="game-collection">
-                <?php if (!empty($games)) : ?>
-                    <?php foreach ($games as $game) : ?>
-                        <div class="game-card">
-                            <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
-                            <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
-                            <p><?php echo htmlspecialchars($game['platforms']); ?></p>
-                            <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <p>Aucun jeu ajouté pour le moment.</p>
-                <?php endif; ?>
-            </div>
-        </section>
-    </main>
-    <?php include 'views/tools/footer.php'; ?>
+<?php include 'views/tools/header.php'; ?>
+<main>
+    <section>
+        <div id="home-page-welcome">
+            <h1>
+                SALUT <?php echo !empty($userFirstName) ? htmlspecialchars($userFirstName) : ''; ?> !<br>
+                PRÊT À AJOUTER DES <br>
+                JEUX À TA COLLECTION ?
+            </h1>
+        </div>
+    </section>
+    <section id="home-page-games">
+        <h2>Mes jeux</h2>
+        <div class="game-collection">
+            <?php if (!empty($games)) : ?>
+                <?php foreach ($games as $game) : ?>
+                    <div class="game-card">
+                        <img src="<?php echo htmlspecialchars($game['url_picture']); ?>" alt="Image du jeu">
+                        <h3><?php echo htmlspecialchars($game['Name_game']); ?></h3>
+                        <p><?php echo htmlspecialchars($game['platforms']); ?></p>
+                        <p><?php echo htmlspecialchars($game['Time_played']); ?> h</p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>Aucun jeu ajouté pour le moment.</p>
+            <?php endif; ?>
+        </div>
+    </section>
+</main>
+<?php include 'views/tools/footer.php'; ?>
 </body>
 </html>

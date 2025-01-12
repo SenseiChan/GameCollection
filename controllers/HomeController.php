@@ -18,19 +18,9 @@ class HomeController {
     }
 
     public function display() {
+        $userFirstName = $this->userFirstName;
+        $games = $this->games;
         require 'views/users/Home.php';
     }
-
-//    public function handle() {
-//        if (empty($this->userFirstName)) {
-//            echo "User name not found.";
-//            return;
-//        }
-//
-//        if (empty($this->games)) {
-//            echo "No games found.";
-//            return;
-//        }
-//    }
 }
 ?>
